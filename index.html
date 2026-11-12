@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ARTIFACT-START -->
+<title>Friends with God Again</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one bright "page" at a time, like turning a picture book; big tap targets, bottom page bar.
+   Single bright theme on purpose (a kids' classroom screen), every color set explicitly. */
+:root {
+  --ink: #26244d;
+  --ink-soft: #57557f;
+  --grape: #6b46d6;
+  --coral: #ff6a5c;
+  --sun: #ffc22e;
+  --leaf: #23a865;
+  --sky: #3aa6f0;
+  --paper: #ffffff;
+  --page-1: #ffe58f;
+  --page-2: #c4e8ff;
+  --page-3: #ffd6c2;
+  --page-4: #c8f3da;
+  --page-5: #e4d9ff;
+  --display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  --step-1: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
+  --step-3: clamp(2.1rem, 1.4rem + 3.2vw, 3.6rem);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--page-1);
+  color: var(--ink);
+  font: 400 var(--step-0)/1.5 var(--body);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background-color .5s ease;
+}
+body[data-page="1"] { background: var(--page-2); }
+body[data-page="2"] { background: var(--page-3); }
+body[data-page="3"] { background: var(--page-4); }
+body[data-page="4"] { background: var(--page-5); }
+
+.deck { flex: 1; position: relative; min-height: 0; }
+.slide {
+  position: absolute; inset: 0;
+  overflow-y: auto;
+  padding-block: clamp(16px, 4vh, 40px) 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: none;
+}
+.slide.on { display: block; animation: pageIn .45s cubic-bezier(.2,.9,.3,1.2); }
+@keyframes pageIn { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
+.inner { max-width: 980px; margin: 0 auto; display: grid; gap: clamp(14px, 2.5vh, 24px); }
+
+.ref {
+  justify-self: start;
+  font: 800 .85rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 999px;
+}
+h1, h2 { font-family: var(--display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: var(--step-3); font-weight: 800; }
+h2 { font-size: var(--step-2); font-weight: 800; }
+.lead { font-size: var(--step-1); margin: 0; max-width: 60ch; color: var(--ink); }
+p { margin: 0; }
+
+.two { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(14px, 3vw, 32px); align-items: center; }
+.two > * { min-width: 0; }
+@media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--paper); border: 3px solid var(--ink); border-radius: 22px;
+  padding: clamp(14px, 2.4vw, 22px); box-shadow: 6px 6px 0 var(--ink);
+}
+.verse { font-family: var(--display); font-weight: 700; font-size: var(--step-1); line-height: 1.3; }
+.verse cite { display: block; margin-top: 6px; font: 800 .9rem/1 var(--body); font-style: normal; color: var(--ink-soft); letter-spacing: .04em; }
+mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius: 6px; }
+
+.btn {
+  font: 800 var(--step-0)/1 var(--body); color: var(--paper); background: var(--grape);
+  border: 3px solid var(--ink); border-radius: 16px; padding: 14px 18px; cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink); transition: transform .12s, box-shadow .12s; min-height: 48px;
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn:disabled { opacity: .45; cursor: default; transform: none; box-shadow: 4px 4px 0 var(--ink); }
+.btn.alt { background: var(--paper); color: var(--ink); }
+.btn.coral { background: var(--coral); }
+.btn.leaf { background: var(--leaf); }
+:focus-visible { outline: 4px solid var(--sky); outline-offset: 3px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.scene { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 22px; border: 3px solid var(--ink); background: #e9f6ff; box-shadow: 6px 6px 0 var(--ink); }
+#gap-scene { max-width: 620px; justify-self: center; }
+.say { min-height: 3em; font-weight: 800; font-size: var(--step-1); color: var(--ink); }
+.say.good { color: var(--leaf); }
+.say.bad { color: var(--coral); }
+[hidden] { display: none !important; }
+
+/* page 1: broken heart */
+.heart-wrap { display: grid; place-items: center; }
+.heart { width: min(320px, 80vw); height: auto; overflow: visible; }
+.heart .half { transition: transform .9s cubic-bezier(.3,1.5,.5,1); }
+.heart .l { transform: translate(-26px, 10px) rotate(-12deg); transform-origin: 100px 120px; }
+.heart .r { transform: translate(26px, 10px) rotate(12deg); transform-origin: 100px 120px; }
+.heart.joined .l, .heart.joined .r { transform: none; }
+.heart .crack { transition: opacity .4s .7s; }
+.heart.joined .crack { opacity: 0; }
+.heart .shine { opacity: 0; transition: opacity .5s .9s; }
+.heart.joined .shine { opacity: 1; }
+.define { display: grid; gap: 6px; }
+.define .word { font-family: var(--display); font-weight: 800; font-size: var(--step-2); color: var(--grape); line-height: 1; }
+.define .say-it { font-weight: 800; color: var(--ink-soft); }
+
+/* page 4: gifts */
+.gifts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 720px) { .gifts { grid-template-columns: repeat(2, 1fr); } }
+.gift {
+  position: relative; min-height: 190px; border: 3px solid var(--ink); border-radius: 20px; cursor: pointer;
+  background: var(--paper); box-shadow: 5px 5px 0 var(--ink); padding: 14px; text-align: left; font: inherit; color: var(--ink);
+  display: grid; align-content: start; gap: 6px;
+}
+.gift .box { display: grid; place-items: center; height: 120px; }
+.gift .box svg { width: 96px; height: 96px; transition: transform .3s; }
+.gift:hover .box svg { transform: rotate(-6deg) scale(1.05); }
+.gift .tap { font-weight: 800; text-align: center; color: var(--ink-soft); }
+.gift .open { display: none; }
+.gift.opened { cursor: default; }
+.gift.opened .box, .gift.opened .tap { display: none; }
+.gift.opened .open { display: grid; gap: 6px; animation: pop .4s cubic-bezier(.3,1.6,.5,1); }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.gift .name { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; }
+.gift small { font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
+.gift[data-c="peace"] .name { color: var(--sky); }
+.gift[data-c="hope"] .name { color: var(--leaf); }
+.gift[data-c="love"] .name { color: var(--coral); }
+.gift[data-c="joy"] .name { color: #d98a00; }
+.meter { font-weight: 800; }
+
+/* page 5: quiz + challenge */
+.quiz { display: grid; gap: 14px; }
+.q { display: grid; gap: 10px; }
+.q .ask { font-weight: 800; font-size: var(--step-1); }
+.choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice { font: 800 var(--step-0)/1.2 var(--body); background: var(--paper); color: var(--ink); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 14px; cursor: pointer; min-height: 46px; }
+.choice.right { background: var(--leaf); color: var(--paper); }
+.choice.wrong { background: var(--coral); color: var(--paper); animation: shake .35s; }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.stars { font-family: var(--display); font-weight: 800; font-size: var(--step-1); color: var(--grape); }
+.challenges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 720px) { .challenges { grid-template-columns: 1fr; } }
+.challenge { font: 700 var(--step-0)/1.35 var(--body); text-align: left; background: var(--paper); color: var(--ink); border: 3px dashed var(--ink); border-radius: 16px; padding: 14px; cursor: pointer; display: grid; gap: 4px; }
+.challenge b { font-family: var(--display); font-size: 1.25rem; line-height: 1.1; }
+.challenge[aria-pressed="true"] { background: var(--sun); border-style: solid; box-shadow: 4px 4px 0 var(--ink); }
+.prayer { font-style: italic; }
+
+/* page bar */
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 10px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--paper); border-top: 3px solid var(--ink);
+}
+.dots { display: flex; gap: 8px; }
+.dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); padding: 0; cursor: pointer; }
+.dot[aria-current="true"] { background: var(--coral); transform: scale(1.2); }
+.count { font: 800 .95rem/1 var(--body); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.bar .btn { padding: 10px 16px; }
+@media (max-width: 480px) { .count { display: none; } .bar .btn { padding: 10px 12px; } }
+
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body data-page="0">
+
+<main class="deck" id="deck">
+
+  <!-- PAGE 1 -->
+  <section class="slide on" aria-label="Page 1 of 5">
+    <div class="inner">
+      <span class="ref">Romans 5:1–11 · Kids Lesson</span>
+      <div class="two">
+        <div style="display:grid;gap:14px">
+          <h1>Friends with God again!</h1>
+          <p class="lead">Have you ever had a fight with a friend, and then made up? Today we learn a big Bible word for making up.</p>
+          <div class="row"><button class="btn coral" id="join-btn">Put the heart back together</button></div>
+          <div class="card define" id="define" hidden>
+            <span class="word">Reconcile</span>
+            <span class="say-it">Say it: REK-un-syle</span>
+            <p>To <b>reconcile</b> means to become friends again after being apart. Romans 5 says Jesus made a way for us to be friends with God again.</p>
+          </div>
+        </div>
+        <div class="heart-wrap">
+          <svg class="heart" id="heart" viewBox="0 0 200 190" role="img" aria-label="A heart broken in two halves">
+            <g class="half l">
+              <path d="M100 60 C 85 25, 30 15, 18 55 C 6 95, 50 135, 100 175 L 108 140 L 92 115 L 110 88 Z" fill="#ff6a5c" stroke="#26244d" stroke-width="5" stroke-linejoin="round"/>
+            </g>
+            <g class="half r">
+              <path d="M100 60 C 115 25, 170 15, 182 55 C 194 95, 150 135, 100 175 L 108 140 L 92 115 L 110 88 Z" fill="#ff8a7e" stroke="#26244d" stroke-width="5" stroke-linejoin="round"/>
+            </g>
+            <path class="crack" d="M100 60 L110 88 L92 115 L108 140 L100 175" fill="none" stroke="#26244d" stroke-width="4" stroke-linejoin="round"/>
+            <g class="shine" fill="#ffc22e" stroke="#26244d" stroke-width="3">
+              <path d="M24 12 l5 11 11 5 -11 5 -5 11 -5 -11 -11 -5 11 -5z"/>
+              <path d="M178 120 l4 8 8 4 -8 4 -4 8 -4 -8 -8 -4 8 -4z"/>
+              <path d="M160 6 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" aria-label="Page 2 of 5">
+    <div class="inner">
+      <span class="ref">Romans 5:6, 10</span>
+      <h2>Uh-oh, a big gap</h2>
+      <p class="lead">Sin means choosing our own way instead of God’s way. Sin made a huge gap between us and God. Can we jump across by ourselves? Tap a way to try!</p>
+      <svg class="scene" id="gap-scene" viewBox="0 0 400 200" role="img" aria-label="A kid on one cliff and God on the other, with a deep gap between">
+        <circle cx="340" cy="62" r="30" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
+        <g stroke="#ffc22e" stroke-width="5" stroke-linecap="round">
+          <line x1="340" y1="16" x2="340" y2="24"/><line x1="386" y1="62" x2="378" y2="62"/><line x1="294" y1="62" x2="302" y2="62"/>
+          <line x1="372" y1="30" x2="366" y2="36"/><line x1="308" y1="30" x2="314" y2="36"/>
+        </g>
+        <text x="340" y="69" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#26244d">God</text>
+        <path d="M0 120 H130 L150 200 H0 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
+        <path d="M270 120 H400 V200 H250 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
+        <text x="200" y="170" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="12" fill="#57557f">THE GAP OF SIN</text>
+        <g id="kid2">
+          <circle cx="80" cy="88" r="10" fill="#ffd6c2" stroke="#26244d" stroke-width="3"/>
+          <path d="M70 120 L72 100 Q80 96 88 100 L90 120 Z" fill="#6b46d6" stroke="#26244d" stroke-width="3" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      <div class="row" id="tries">
+        <button class="btn" data-try="Being really, really good">Be really good</button>
+        <button class="btn" data-try="Trying super hard">Try super hard</button>
+        <button class="btn" data-try="Doing lots of nice things">Do lots of nice things</button>
+      </div>
+      <p class="say" id="gap-say" aria-live="polite"></p>
+      <div class="card verse" id="gap-verse" hidden>“For while we were yet weak, at the right time Christ died for the ungodly.”<cite>Romans 5:6 (WEB)</cite></div>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" aria-label="Page 3 of 5">
+    <div class="inner">
+      <span class="ref">Romans 5:8–10 · Memory verse</span>
+      <h2>God built the bridge!</h2>
+      <div class="two">
+        <div style="display:grid;gap:14px">
+          <p class="lead">We could not cross the gap, so God came to us. Jesus died on the cross for our sins and rose again. The cross is the bridge back to God!</p>
+          <div class="row">
+            <button class="btn coral" id="build-btn">Build the bridge</button>
+            <button class="btn leaf" id="walk-btn" disabled>Walk across</button>
+          </div>
+          <p class="say good" id="bridge-say" aria-live="polite"></p>
+        </div>
+        <svg class="scene" id="bridge-scene" viewBox="0 0 400 200" role="img" aria-label="The cross becomes a bridge across the gap">
+          <circle cx="340" cy="62" r="30" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
+          <text x="340" y="69" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#26244d">God</text>
+          <path d="M0 120 H130 L150 200 H0 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
+          <path d="M270 120 H400 V200 H250 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
+          <g id="cross" opacity="0">
+            <rect x="194" y="34" width="12" height="86" rx="3" fill="#a0612c" stroke="#26244d" stroke-width="3"/>
+            <rect x="172" y="54" width="56" height="12" rx="3" fill="#a0612c" stroke="#26244d" stroke-width="3"/>
+          </g>
+          <rect id="plank" x="128" y="116" width="144" height="12" rx="3" fill="#c98446" stroke="#26244d" stroke-width="3" style="transform-origin:128px 122px;transform:scaleX(0)"/>
+          <g id="kid3">
+            <circle cx="80" cy="88" r="10" fill="#ffd6c2" stroke="#26244d" stroke-width="3"/>
+            <path d="M70 120 L72 100 Q80 96 88 100 L90 120 Z" fill="#6b46d6" stroke="#26244d" stroke-width="3" stroke-linejoin="round"/>
+          </g>
+          <g id="hearts" opacity="0" fill="#ff6a5c" stroke="#26244d" stroke-width="2.5">
+            <path d="M300 40 c-6 -10 -20 -4 -14 6 l14 12 14 -12 c6 -10 -8 -16 -14 -6z"/>
+            <path d="M372 104 c-4 -7 -14 -3 -10 4 l10 9 10 -9 c4 -7 -6 -11 -10 -4z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="card verse">“But God commends his own love toward us, in that <mark>while we were yet sinners, Christ died for us.</mark>”<cite>Romans 5:8 (WEB) · Say it 3 times together!</cite></div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" aria-label="Page 4 of 5">
+    <div class="inner">
+      <span class="ref">Romans 5:1–5, 11</span>
+      <h2>Friends of God get gifts!</h2>
+      <div class="row" style="justify-content:space-between">
+        <p class="lead">When we trust Jesus, God gives us presents that last forever. Tap each one to open it.</p>
+        <span class="meter" id="gift-meter" aria-live="polite">0 of 4 opened</span>
+      </div>
+      <div class="gifts">
+        <button class="gift" data-c="peace" aria-label="Open gift 1">
+          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#3aa6f0" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#7cc6ff" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#ffc22e" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#ffc22e" stroke="#26244d" stroke-width="4"/></svg></span>
+          <span class="tap">Tap to open</span>
+          <span class="open"><span class="name">Peace</span><small>VERSE 1</small><span>We have peace with God. No more being enemies. God is not mad at us anymore.</span></span>
+        </button>
+        <button class="gift" data-c="hope" aria-label="Open gift 2">
+          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#23a865" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#5fd391" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#ff6a5c" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#ff6a5c" stroke="#26244d" stroke-width="4"/></svg></span>
+          <span class="tap">Tap to open</span>
+          <span class="open"><span class="name">Hope</span><small>VERSES 2–4</small><span>Even on hard days, God is helping us grow stronger. Our hope in God never lets us down.</span></span>
+        </button>
+        <button class="gift" data-c="love" aria-label="Open gift 3">
+          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#ff6a5c" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#ff9b91" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#6b46d6" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#6b46d6" stroke="#26244d" stroke-width="4"/></svg></span>
+          <span class="tap">Tap to open</span>
+          <span class="open"><span class="name">Love</span><small>VERSE 5</small><span>God pours his love into our hearts by the Holy Spirit, like filling a cup all the way up.</span></span>
+        </button>
+        <button class="gift" data-c="joy" aria-label="Open gift 4">
+          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#ffc22e" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#ffe58f" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#3aa6f0" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#3aa6f0" stroke="#26244d" stroke-width="4"/></svg></span>
+          <span class="tap">Tap to open</span>
+          <span class="open"><span class="name">Joy</span><small>VERSE 11</small><span>We are so happy in God! Jesus made us his friends, and that is the best news ever.</span></span>
+        </button>
+      </div>
+      <div class="card verse" id="gift-verse" hidden>“Being therefore justified by faith, we have <mark>peace with God</mark> through our Lord Jesus Christ.”<cite>Romans 5:1 (WEB)</cite></div>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" aria-label="Page 5 of 5">
+    <div class="inner">
+      <span class="ref">Review &amp; live it</span>
+      <div class="row" style="justify-content:space-between">
+        <h2>Quick quiz!</h2>
+        <span class="stars" id="stars" aria-live="polite">☆ ☆ ☆</span>
+      </div>
+      <div class="card quiz" id="quiz">
+        <div class="q" data-answer="0">
+          <span class="ask">1. What does “reconcile” mean?</span>
+          <div class="choices"><button class="choice">Become friends again</button><button class="choice">Go to sleep</button><button class="choice">Win a race</button></div>
+        </div>
+        <div class="q" data-answer="1">
+          <span class="ask">2. Who built the bridge back to God?</span>
+          <div class="choices"><button class="choice">Me, by being good</button><button class="choice">Jesus</button><button class="choice">Nobody</button></div>
+        </div>
+        <div class="q" data-answer="2">
+          <span class="ask">3. God showed his love while we were…</span>
+          <div class="choices"><button class="choice">Being perfect</button><button class="choice">Asleep</button><button class="choice">Still sinners</button></div>
+        </div>
+      </div>
+      <h2>Be a reconciler this week</h2>
+      <p class="lead">God made peace with us, so we can make peace with others. Pick one challenge.</p>
+      <div class="challenges" id="challenges">
+        <button class="challenge" aria-pressed="false"><b>Say sorry</b><span>Tell someone you hurt, “I’m sorry. Will you forgive me?”</span></button>
+        <button class="challenge" aria-pressed="false"><b>Forgive</b><span>When someone says sorry to you, say, “I forgive you.”</span></button>
+        <button class="challenge" aria-pressed="false"><b>Make a card</b><span>Draw a picture for someone you argued with.</span></button>
+      </div>
+      <p class="say good" id="pick-say" aria-live="polite"></p>
+      <div class="card prayer"><b style="font-style:normal">Let’s pray:</b> Dear God, thank you for loving me even when I sin. Thank you, Jesus, for being the bridge so I can be your friend. Help me make peace with others this week. Amen.</div>
+    </div>
+  </section>
+</main>
+
+<nav class="bar" aria-label="Pages">
+  <button class="btn alt" id="prev" aria-label="Previous page">◀ Back</button>
+  <div class="dots" id="dots"></div>
+  <span class="count" id="count">1 / 5</span>
+  <button class="btn" id="next" aria-label="Next page">Next ▶</button>
+</nav>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsEl = document.getElementById('dots');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let page = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'Go to page ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function go(i) {
+    page = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, k) => s.classList.toggle('on', k === page));
+    [...dotsEl.children].forEach((d, k) => d.setAttribute('aria-current', k === page ? 'true' : 'false'));
+    document.body.dataset.page = page;
+    document.getElementById('count').textContent = (page + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = page === 0;
+    document.getElementById('next').disabled = page === slides.length - 1;
+    slides[page].scrollTop = 0;
+  }
+  document.getElementById('prev').onclick = () => go(page - 1);
+  document.getElementById('next').onclick = () => go(page + 1);
+  addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') go(page + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(page - 1);
+  });
+  let sx = null;
+  document.getElementById('deck').addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  document.getElementById('deck').addEventListener('touchend', (e) => {
+    if (sx === null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 70) go(page + (dx < 0 ? 1 : -1));
+    sx = null;
+  });
+  go(0);
+
+  const anim = (el, frames, opts) => el.animate(frames, { duration: reduce ? 1 : opts.duration, easing: opts.easing || 'ease-in-out', fill: 'forwards' }).finished;
+
+  // Page 1: join the heart
+  document.getElementById('join-btn').onclick = (e) => {
+    document.getElementById('heart').classList.add('joined');
+    document.getElementById('heart').setAttribute('aria-label', 'The heart is whole again');
+    document.getElementById('define').hidden = false;
+    e.currentTarget.textContent = 'Friends again!';
+    e.currentTarget.disabled = true;
+    burst(40);
+  };
+
+  // Page 2: try to jump the gap
+  const kid2 = document.getElementById('kid2');
+  const tried = new Set();
+  let jumping = false;
+  document.querySelectorAll('#tries .btn').forEach((b) => {
+    b.onclick = async () => {
+      if (jumping) return;
+      jumping = true;
+      const say = document.getElementById('gap-say');
+      say.className = 'say'; say.textContent = b.dataset.try + '… JUMP!';
+      await anim(kid2, [
+        { transform: 'translate(0,0)' },
+        { transform: 'translate(45px,-45px)', offset: .35 },
+        { transform: 'translate(80px,-10px)', offset: .6 },
+        { transform: 'translate(80px,90px)', opacity: 1, offset: .85 },
+        { transform: 'translate(80px,110px)', opacity: 0 }
+      ], { duration: 1500 });
+      say.className = 'say bad';
+      say.textContent = 'Oh no! Not far enough. Nobody can jump this gap alone.';
+      kid2.animate([{ transform: 'translate(0,0)', opacity: 0 }, { transform: 'translate(0,0)', opacity: 1 }], { duration: reduce ? 1 : 500, fill: 'forwards' });
+      tried.add(b.dataset.try);
+      b.disabled = true;
+      if (tried.size >= 2) document.getElementById('gap-verse').hidden = false;
+      if (tried.size === 3) { say.className = 'say good'; say.textContent = 'We need help! Turn the page to see what God did.'; }
+      jumping = false;
+    };
+  });
+
+  // Page 3: build the cross bridge and walk across
+  const buildBtn = document.getElementById('build-btn');
+  const walkBtn = document.getElementById('walk-btn');
+  buildBtn.onclick = async () => {
+    buildBtn.disabled = true;
+    const say = document.getElementById('bridge-say');
+    await anim(document.getElementById('cross'), [{ opacity: 0, transform: 'translateY(-40px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 700, easing: 'cubic-bezier(.3,1.5,.5,1)' });
+    await anim(document.getElementById('plank'), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 900 });
+    say.textContent = 'Jesus made the way across!';
+    walkBtn.disabled = false;
+  };
+  walkBtn.onclick = async () => {
+    walkBtn.disabled = true;
+    const kid = document.getElementById('kid3');
+    const steps = [];
+    for (let i = 0; i <= 10; i++) steps.push({ transform: `translate(${i * 23}px, ${i % 2 ? -6 : 0}px)` });
+    await anim(kid, steps, { duration: 2200, easing: 'linear' });
+    await anim(document.getElementById('hearts'), [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500 });
+    document.getElementById('bridge-say').textContent = 'Friends with God again! That is what “reconciled” means.';
+    burst(60);
+  };
+
+  // Page 4: open gifts
+  const gifts = [...document.querySelectorAll('.gift')];
+  gifts.forEach((g) => {
+    g.onclick = () => {
+      if (g.classList.contains('opened')) return;
+      g.classList.add('opened');
+      g.setAttribute('aria-label', g.querySelector('.name').textContent + ' gift, opened');
+      const n = gifts.filter((x) => x.classList.contains('opened')).length;
+      document.getElementById('gift-meter').textContent = n === 4 ? 'All 4 opened!' : n + ' of 4 opened';
+      if (n === 4) { document.getElementById('gift-verse').hidden = false; burst(70); }
+    };
+  });
+
+  // Page 5: quiz
+  let score = 0;
+  document.querySelectorAll('.q').forEach((q) => {
+    const answer = +q.dataset.answer;
+    const btns = [...q.querySelectorAll('.choice')];
+    btns.forEach((b, i) => {
+      b.onclick = () => {
+        if (q.dataset.done) return;
+        if (i === answer) {
+          b.classList.add('right');
+          q.dataset.done = '1';
+          btns.forEach((x) => { if (x !== b) x.disabled = true; });
+          score++;
+          document.getElementById('stars').textContent = '★ '.repeat(score) + '☆ '.repeat(3 - score);
+          if (score === 3) burst(140);
+        } else {
+          b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong');
+        }
+      };
+    });
+  });
+  document.querySelectorAll('.challenge').forEach((c) => {
+    c.onclick = () => {
+      document.querySelectorAll('.challenge').forEach((x) => x.setAttribute('aria-pressed', x === c ? 'true' : 'false'));
+      document.getElementById('pick-say').textContent = 'Great choice! You picked “' + c.querySelector('b').textContent + '.” God will help you do it.';
+    };
+  });
+
+  // Confetti
+  const cv = document.getElementById('confetti');
+  const ctx = cv.getContext('2d');
+  const colors = ['#ff6a5c', '#ffc22e', '#23a865', '#3aa6f0', '#6b46d6'];
+  let bits = [], running = false;
+  function burst(n) {
+    if (reduce) return;
+    cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio;
+    for (let i = 0; i < n; i++) bits.push({
+      x: innerWidth * (0.2 + Math.random() * 0.6), y: innerHeight * 0.45,
+      vx: (Math.random() - 0.5) * 12, vy: -6 - Math.random() * 9,
+      s: 6 + Math.random() * 7, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4,
+      c: colors[i % colors.length], life: 0
+    });
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    bits.forEach((b) => {
+      b.vy += 0.35; b.x += b.vx; b.y += b.vy; b.r += b.vr; b.life++;
+      ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.r);
+      ctx.fillStyle = b.c; ctx.fillRect(-b.s / 2, -b.s / 4, b.s, b.s / 2);
+      ctx.restore();
+    });
+    bits = bits.filter((b) => b.y < innerHeight + 40 && b.life < 240);
+    if (bits.length) requestAnimationFrame(tick);
+    else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+})();
+</script>
+<!-- ARTIFACT-END -->
+</body>
+</html>
