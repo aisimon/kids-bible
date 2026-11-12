@@ -180,6 +180,14 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
 .bar .btn { padding: 10px 16px; }
 @media (max-width: 480px) { .count { display: none; } .bar .btn { padding: 10px 12px; } }
 
+.bar { flex-wrap: nowrap; }
+.music { margin-left: auto; }
+.music .note { display: inline-block; font-size: 1.15em; }
+.music[aria-pressed="true"] { background: var(--sun); }
+.music[aria-pressed="true"] .note { animation: bob .6s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(2px) rotate(-8deg); } to { transform: translateY(-3px) rotate(8deg); } }
+@media (max-width: 480px) { #music-label { display: none; } }
+
 #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -369,6 +377,7 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
   <button class="btn alt" id="prev" aria-label="Previous page">◀ Back</button>
   <div class="dots" id="dots"></div>
   <span class="count" id="count">1 / 5</span>
+  <button class="btn alt music" id="music" aria-pressed="false" title="Turn music on or off (M)"><span class="note" aria-hidden="true">♪</span> <span id="music-label">Music off</span></button>
   <button class="btn" id="next" aria-label="Next page">Next ▶</button>
 </nav>
 <canvas id="confetti" aria-hidden="true"></canvas>
@@ -414,6 +423,106 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
   });
   go(0);
 
+  // ---------- Music & sound effects (all synthesized, original tune) ----------
+  const NOTE = (n) => {
+    const m = /^([A-G])(#?)(\d)$/.exec(n);
+    const semis = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] ? 1 : 0);
+    return 440 * Math.pow(2, ((+m[3] + 1) * 12 + semis - 69) / 12);
+  };
+  // 8-bar cheerful loop in C major: C G Am F | C F G C
+  const MELODY = [
+    ['E4', .5], ['G4', .5], ['C5', 1], ['G4', .5], ['E4', .5], ['G4', 1],
+    ['D4', .5], ['G4', .5], ['B4', 1], ['A4', .5], ['G4', .5], ['D5', 1],
+    ['C5', .5], ['B4', .5], ['A4', 1], ['E4', .5], ['A4', .5], ['C5', 1],
+    ['A4', .5], ['G4', .5], ['F4', 1], ['A4', 1], ['C5', 1],
+    ['E5', 1], ['D5', .5], ['C5', .5], ['G4', 1], ['E4', 1],
+    ['F4', .5], ['A4', .5], ['C5', 1], ['D5', .5], ['C5', .5], ['A4', 1],
+    ['G4', .5], ['A4', .5], ['B4', .5], ['D5', .5], ['G5', 1], ['F5', .5], ['D5', .5],
+    ['C5', 1.5], ['G4', .5], ['C5', 2],
+  ];
+  const BASS = [['C3', 'G2'], ['G2', 'D3'], ['A2', 'E3'], ['F2', 'C3'], ['C3', 'G2'], ['F2', 'C3'], ['G2', 'D3'], ['C3', 'G2']];
+  const BPM = 116, BEAT = 60 / BPM;
+
+  let ac = null, master = null, sfxBus = null, musicOn = false, timer = null;
+  let nextTime = 0, mi = 0, beatInLoop = 0;
+  function audio() {
+    if (!ac) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ac = new AC();
+      master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+      sfxBus = ac.createGain(); sfxBus.gain.value = 0.35; sfxBus.connect(ac.destination);
+    }
+    if (ac.state === 'suspended') ac.resume();
+    return ac;
+  }
+  // marimba-ish tone: sine + soft overtone with a quick decay
+  function tone(freq, t, dur, vol, dest, type = 'sine') {
+    const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), g2 = ac.createGain();
+    o.type = type; o.frequency.value = freq;
+    o2.type = 'sine'; o2.frequency.value = freq * 4; g2.gain.value = 0.12;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); o2.connect(g2); g2.connect(g); g.connect(dest);
+    o.start(t); o2.start(t); o.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+  }
+  function schedule() {
+    while (nextTime < ac.currentTime + 0.25) {
+      const [n, beats] = MELODY[mi];
+      tone(NOTE(n), nextTime, Math.min(0.9, beats * BEAT * 1.6), 0.5, master);
+      // bass on every beat that this note covers
+      for (let b = 0; b < beats; b += 0.5) {
+        const pos = beatInLoop + b;
+        if (Number.isInteger(pos)) {
+          const bar = Math.floor(pos / 4) % 8, beat = pos % 4;
+          if (beat === 0 || beat === 2) tone(NOTE(BASS[bar][beat === 0 ? 0 : 1]), nextTime + b * BEAT, 0.45, 0.42, master, 'triangle');
+          if (beat === 1 || beat === 3) tone(2400, nextTime + b * BEAT, 0.04, 0.05, master); // soft tick
+        }
+      }
+      nextTime += beats * BEAT;
+      beatInLoop = (beatInLoop + beats) % 32;
+      mi = (mi + 1) % MELODY.length;
+    }
+  }
+  function setMusic(on) {
+    if (on && !audio()) return;
+    musicOn = on;
+    const btn = document.getElementById('music');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    document.getElementById('music-label').textContent = on ? 'Music on' : 'Music off';
+    if (on) {
+      master.gain.cancelScheduledValues(ac.currentTime);
+      master.gain.setTargetAtTime(0.16, ac.currentTime, 0.3);
+      nextTime = ac.currentTime + 0.1; mi = 0; beatInLoop = 0;
+      clearInterval(timer); timer = setInterval(schedule, 60); schedule();
+    } else if (ac) {
+      master.gain.setTargetAtTime(0, ac.currentTime, 0.15);
+      clearInterval(timer); timer = null;
+    }
+  }
+  document.getElementById('music').onclick = () => setMusic(!musicOn);
+  addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'm') setMusic(!musicOn); });
+  document.addEventListener('visibilitychange', () => {
+    if (!ac) return;
+    if (document.hidden) ac.suspend(); else ac.resume();
+  });
+
+  const sfx = {
+    chime() { if (!audio()) return; const t = ac.currentTime; ['C5', 'E5', 'G5', 'C6'].forEach((n, i) => tone(NOTE(n), t + i * 0.09, 0.6, 0.5, sfxBus)); },
+    ding() { if (!audio()) return; const t = ac.currentTime; tone(NOTE('G5'), t, 0.4, 0.5, sfxBus); tone(NOTE('C6'), t + 0.1, 0.6, 0.5, sfxBus); },
+    pop() { if (!audio()) return; const t = ac.currentTime; tone(NOTE('A5'), t, 0.15, 0.6, sfxBus); tone(NOTE('E6'), t + 0.05, 0.2, 0.35, sfxBus); },
+    boing() {
+      if (!audio()) return;
+      const t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(110, t + 0.45);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.5, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+      o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.55);
+    },
+    step() { if (!audio()) return; tone(NOTE('E5'), ac.currentTime, 0.08, 0.25, sfxBus); },
+  };
+
   const anim = (el, frames, opts) => el.animate(frames, { duration: reduce ? 1 : opts.duration, easing: opts.easing || 'ease-in-out', fill: 'forwards' }).finished;
 
   // Page 1: join the heart
@@ -423,6 +532,7 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     document.getElementById('define').hidden = false;
     e.currentTarget.textContent = 'Friends again!';
     e.currentTarget.disabled = true;
+    sfx.chime();
     burst(40);
   };
 
@@ -436,6 +546,8 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
       jumping = true;
       const say = document.getElementById('gap-say');
       say.className = 'say'; say.textContent = b.dataset.try + '… JUMP!';
+      sfx.pop();
+      setTimeout(sfx.boing, reduce ? 0 : 850);
       await anim(kid2, [
         { transform: 'translate(0,0)' },
         { transform: 'translate(45px,-45px)', offset: .35 },
@@ -463,6 +575,7 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     await anim(document.getElementById('cross'), [{ opacity: 0, transform: 'translateY(-40px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 700, easing: 'cubic-bezier(.3,1.5,.5,1)' });
     await anim(document.getElementById('plank'), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 900 });
     say.textContent = 'Jesus made the way across!';
+    sfx.ding();
     walkBtn.disabled = false;
   };
   walkBtn.onclick = async () => {
@@ -470,9 +583,12 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     const kid = document.getElementById('kid3');
     const steps = [];
     for (let i = 0; i <= 10; i++) steps.push({ transform: `translate(${i * 23}px, ${i % 2 ? -6 : 0}px)` });
+    const stepTimer = setInterval(sfx.step, 220);
     await anim(kid, steps, { duration: 2200, easing: 'linear' });
+    clearInterval(stepTimer);
     await anim(document.getElementById('hearts'), [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500 });
     document.getElementById('bridge-say').textContent = 'Friends with God again! That is what “reconciled” means.';
+    sfx.chime();
     burst(60);
   };
 
@@ -482,10 +598,11 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     g.onclick = () => {
       if (g.classList.contains('opened')) return;
       g.classList.add('opened');
+      sfx.pop();
       g.setAttribute('aria-label', g.querySelector('.name').textContent + ' gift, opened');
       const n = gifts.filter((x) => x.classList.contains('opened')).length;
       document.getElementById('gift-meter').textContent = n === 4 ? 'All 4 opened!' : n + ' of 4 opened';
-      if (n === 4) { document.getElementById('gift-verse').hidden = false; burst(70); }
+      if (n === 4) { document.getElementById('gift-verse').hidden = false; setTimeout(sfx.chime, 200); burst(70); }
     };
   });
 
@@ -503,9 +620,10 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
           btns.forEach((x) => { if (x !== b) x.disabled = true; });
           score++;
           document.getElementById('stars').textContent = '★ '.repeat(score) + '☆ '.repeat(3 - score);
-          if (score === 3) burst(140);
+          if (score === 3) { sfx.chime(); burst(140); } else sfx.ding();
         } else {
           b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong');
+          sfx.boing();
         }
       };
     });
@@ -513,6 +631,7 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
   document.querySelectorAll('.challenge').forEach((c) => {
     c.onclick = () => {
       document.querySelectorAll('.challenge').forEach((x) => x.setAttribute('aria-pressed', x === c ? 'true' : 'false'));
+      sfx.pop();
       document.getElementById('pick-say').textContent = 'Great choice! You picked “' + c.querySelector('b').textContent + '.” God will help you do it.';
     };
   });

@@ -14,6 +14,6 @@ A 5-page interactive presentation on **reconciliation**: becoming friends with G
 | 4 | Gifts for God's friends (vv. 1–5, 11) | Open Peace, Hope, Love and Joy |
 | 5 | Review and live it | 3-question quiz, a “be a reconciler” challenge, prayer |
 
-Open `index.html` in any browser. It's a single file with no build step; fonts load from Google Fonts. Move between pages with the Back/Next buttons, the dots, the arrow keys, or a swipe.
+Open `index.html` in any browser. It's a single file with no build step; fonts load from Google Fonts. Move between pages with the Back/Next buttons, the dots, the arrow keys, or a swipe. Tap **♪ Music** (or press `M`) for a cheerful background tune; taps also play small sound effects. All sounds are synthesized in the browser (an original melody, no audio files).
 
 Scripture quotes are from the World English Bible (WEB, public domain).
