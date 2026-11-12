@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- ARTIFACT-START -->
-<title>Friends with God Again</title>
+<title>God's Gift of Righteousness</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
 <style>
-/* Layout: one bright "page" at a time, like turning a picture book; big tap targets, bottom page bar.
-   Single bright theme on purpose (a kids' classroom screen), every color set explicitly. */
+/* Layout: one bright "page" at a time, like a picture book; big tap targets; bottom page bar.
+   Single bright theme on purpose (a kids' classroom screen); every color set explicitly. */
 :root {
   --ink: #26244d;
   --ink-soft: #57557f;
@@ -20,16 +20,13 @@
   --sun: #ffc22e;
   --leaf: #23a865;
   --sky: #3aa6f0;
+  --teal: #0e8a9c;
   --paper: #ffffff;
-  --page-1: #ffe58f;
-  --page-2: #c4e8ff;
-  --page-3: #ffd6c2;
-  --page-4: #c8f3da;
-  --page-5: #e4d9ff;
+  --adam: #8a8fa6;
   --display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
   --body: "Nunito", "Segoe UI", system-ui, sans-serif;
   --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
-  --step-1: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+  --step-1: clamp(1.15rem, 1.02rem + 0.6vw, 1.45rem);
   --step-2: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
   --step-3: clamp(2.1rem, 1.4rem + 3.2vw, 3.6rem);
   color-scheme: light;
@@ -37,59 +34,57 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
-  margin: 0;
-  background: var(--page-1);
-  color: var(--ink);
+  margin: 0; background: #ffe58f; color: var(--ink);
   font: 400 var(--step-0)/1.5 var(--body);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  display: flex; flex-direction: column; overflow: hidden;
   transition: background-color .5s ease;
 }
-body[data-page="1"] { background: var(--page-2); }
-body[data-page="2"] { background: var(--page-3); }
-body[data-page="3"] { background: var(--page-4); }
-body[data-page="4"] { background: var(--page-5); }
+body[data-page="1"] { background: #ffd6c2; }
+body[data-page="2"] { background: #c4e8ff; }
+body[data-page="3"] { background: #c8f3da; }
+body[data-page="4"] { background: #e4d9ff; }
+body[data-page="5"] { background: #ffe0ef; }
+body[data-page="6"] { background: #d4f4f7; }
+body[data-page="7"] { background: #fff1b8; }
+body[data-page="8"] { background: #dcefc4; }
+body[data-page="9"] { background: #ffd9a8; }
 
 .deck { flex: 1; position: relative; min-height: 0; }
 .slide {
-  position: absolute; inset: 0;
-  overflow-y: auto;
-  padding-block: clamp(16px, 4vh, 40px) 24px;
+  position: absolute; inset: 0; overflow-y: auto; display: none;
+  padding-block: clamp(16px, 3.5vh, 36px) 24px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: none;
 }
 .slide.on { display: block; animation: pageIn .45s cubic-bezier(.2,.9,.3,1.2); }
 @keyframes pageIn { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
-.inner { max-width: 980px; margin: 0 auto; display: grid; gap: clamp(14px, 2.5vh, 24px); }
+.inner { max-width: 1000px; margin: 0 auto; display: grid; gap: clamp(12px, 2.2vh, 22px); }
+.inner > * { min-width: 0; }
 
-.ref {
-  justify-self: start;
-  font: 800 .85rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase;
-  background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 999px;
-}
-h1, h2 { font-family: var(--display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ref { font: 800 .85rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 999px; }
+.tag { font: 800 .85rem/1 var(--body); letter-spacing: .04em; color: var(--ink); background: var(--paper); border: 2px solid var(--ink); padding: 6px 10px; border-radius: 999px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
 h1 { font-size: var(--step-3); font-weight: 800; }
 h2 { font-size: var(--step-2); font-weight: 800; }
-.lead { font-size: var(--step-1); margin: 0; max-width: 60ch; color: var(--ink); }
+h3 { font-size: var(--step-1); font-weight: 800; }
+.lead { font-size: var(--step-1); margin: 0; max-width: 62ch; }
 p { margin: 0; }
+.truth { color: var(--teal); font-weight: 800; }
 
-.two { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(14px, 3vw, 32px); align-items: center; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2.5vw, 28px); align-items: start; }
 .two > * { min-width: 0; }
-@media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
 
-.card {
-  background: var(--paper); border: 3px solid var(--ink); border-radius: 22px;
-  padding: clamp(14px, 2.4vw, 22px); box-shadow: 6px 6px 0 var(--ink);
-}
+.card { background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: clamp(14px, 2.2vw, 22px); box-shadow: 6px 6px 0 var(--ink); }
+.stack { display: grid; gap: 10px; }
 .verse { font-family: var(--display); font-weight: 700; font-size: var(--step-1); line-height: 1.3; }
 .verse cite { display: block; margin-top: 6px; font: 800 .9rem/1 var(--body); font-style: normal; color: var(--ink-soft); letter-spacing: .04em; }
 mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius: 6px; }
 
 .btn {
   font: 800 var(--step-0)/1 var(--body); color: var(--paper); background: var(--grape);
-  border: 3px solid var(--ink); border-radius: 16px; padding: 14px 18px; cursor: pointer;
+  border: 3px solid var(--ink); border-radius: 16px; padding: 13px 17px; cursor: pointer;
   box-shadow: 4px 4px 0 var(--ink); transition: transform .12s, box-shadow .12s; min-height: 48px;
 }
 .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
@@ -98,98 +93,151 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
 .btn.alt { background: var(--paper); color: var(--ink); }
 .btn.coral { background: var(--coral); }
 .btn.leaf { background: var(--leaf); }
+.btn.small { padding: 9px 13px; min-height: 42px; box-shadow: 3px 3px 0 var(--ink); }
 :focus-visible { outline: 4px solid var(--sky); outline-offset: 3px; }
 .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-
-.scene { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 22px; border: 3px solid var(--ink); background: #e9f6ff; box-shadow: 6px 6px 0 var(--ink); }
-#gap-scene { max-width: 620px; justify-self: center; }
-.say { min-height: 3em; font-weight: 800; font-size: var(--step-1); color: var(--ink); }
+.say { min-height: 1.6em; font-weight: 800; font-size: var(--step-1); }
 .say.good { color: var(--leaf); }
-.say.bad { color: var(--coral); }
+.say.bad { color: #d6402f; }
 [hidden] { display: none !important; }
-
-/* page 1: broken heart */
-.heart-wrap { display: grid; place-items: center; }
-.heart { width: min(320px, 80vw); height: auto; overflow: visible; }
-.heart .half { transition: transform .9s cubic-bezier(.3,1.5,.5,1); }
-.heart .l { transform: translate(-26px, 10px) rotate(-12deg); transform-origin: 100px 120px; }
-.heart .r { transform: translate(26px, 10px) rotate(12deg); transform-origin: 100px 120px; }
-.heart.joined .l, .heart.joined .r { transform: none; }
-.heart .crack { transition: opacity .4s .7s; }
-.heart.joined .crack { opacity: 0; }
-.heart .shine { opacity: 0; transition: opacity .5s .9s; }
-.heart.joined .shine { opacity: 1; }
-.define { display: grid; gap: 6px; }
-.define .word { font-family: var(--display); font-weight: 800; font-size: var(--step-2); color: var(--grape); line-height: 1; }
-.define .say-it { font-weight: 800; color: var(--ink-soft); }
-
-/* page 4: gifts */
-.gifts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-@media (max-width: 720px) { .gifts { grid-template-columns: repeat(2, 1fr); } }
-.gift {
-  position: relative; min-height: 190px; border: 3px solid var(--ink); border-radius: 20px; cursor: pointer;
-  background: var(--paper); box-shadow: 5px 5px 0 var(--ink); padding: 14px; text-align: left; font: inherit; color: var(--ink);
-  display: grid; align-content: start; gap: 6px;
-}
-.gift .box { display: grid; place-items: center; height: 120px; }
-.gift .box svg { width: 96px; height: 96px; transition: transform .3s; }
-.gift:hover .box svg { transform: rotate(-6deg) scale(1.05); }
-.gift .tap { font-weight: 800; text-align: center; color: var(--ink-soft); }
-.gift .open { display: none; }
-.gift.opened { cursor: default; }
-.gift.opened .box, .gift.opened .tap { display: none; }
-.gift.opened .open { display: grid; gap: 6px; animation: pop .4s cubic-bezier(.3,1.6,.5,1); }
+.shake { animation: shake .35s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
-.gift .name { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; }
-.gift small { font-weight: 800; color: var(--ink-soft); letter-spacing: .04em; }
-.gift[data-c="peace"] .name { color: var(--sky); }
-.gift[data-c="hope"] .name { color: var(--leaf); }
-.gift[data-c="love"] .name { color: var(--coral); }
-.gift[data-c="joy"] .name { color: #d98a00; }
-.meter { font-weight: 800; }
 
-/* page 5: quiz + challenge */
-.quiz { display: grid; gap: 14px; }
-.q { display: grid; gap: 10px; }
-.q .ask { font-weight: 800; font-size: var(--step-1); }
-.choices { display: flex; flex-wrap: wrap; gap: 10px; }
-.choice { font: 800 var(--step-0)/1.2 var(--body); background: var(--paper); color: var(--ink); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 14px; cursor: pointer; min-height: 46px; }
-.choice.right { background: var(--leaf); color: var(--paper); }
-.choice.wrong { background: var(--coral); color: var(--paper); animation: shake .35s; }
-@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-.stars { font-family: var(--display); font-weight: 800; font-size: var(--step-1); color: var(--grape); }
-.challenges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-@media (max-width: 720px) { .challenges { grid-template-columns: 1fr; } }
-.challenge { font: 700 var(--step-0)/1.35 var(--body); text-align: left; background: var(--paper); color: var(--ink); border: 3px dashed var(--ink); border-radius: 16px; padding: 14px; cursor: pointer; display: grid; gap: 4px; }
-.challenge b { font-family: var(--display); font-size: 1.25rem; line-height: 1.1; }
-.challenge[aria-pressed="true"] { background: var(--sun); border-style: solid; box-shadow: 4px 4px 0 var(--ink); }
+/* page 1: title */
+.hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: center; }
+@media (max-width: 760px) { .hero { grid-template-columns: 1fr; } }
+.gift-art { width: min(300px, 70vw); height: auto; justify-self: center; overflow: visible; }
+.gift-art .lid { transform-origin: 40px 92px; transition: transform .8s cubic-bezier(.3,1.6,.5,1); }
+.gift-art.open .lid { transform: rotate(-28deg) translate(-8px, -26px); }
+.gift-art .glow { opacity: 0; transition: opacity .6s .3s; }
+.gift-art.open .glow { opacity: 1; }
+
+/* page 2: inheritance */
+.offer { display: grid; gap: 10px; }
+.offer .item { font-family: var(--display); font-weight: 800; font-size: var(--step-2); color: var(--grape); line-height: 1; min-height: 1.1em; }
+.boxes { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+@media (max-width: 760px) { .boxes { grid-template-columns: repeat(4, 1fr); } }
+.tbox { position: relative; aspect-ratio: 1; max-width: 100%; border: 3px solid var(--ink); border-radius: 14px; background: #b87333; color: var(--paper); font: 800 1.5rem/1 var(--display); cursor: pointer; box-shadow: 3px 3px 0 var(--ink); display: grid; place-items: center; padding: 4px; }
+.tbox::before { content: ""; position: absolute; left: 0; right: 0; top: 34%; height: 9%; background: var(--sun); border-block: 2px solid var(--ink); }
+.tbox span { position: relative; text-shadow: 0 2px 0 var(--ink); }
+.tbox:disabled { cursor: default; }
+.tbox.waiting { animation: wiggle 1s ease-in-out infinite; }
+@keyframes wiggle { 50% { transform: rotate(-3deg) scale(1.04); } }
+.tbox.claimed { background: var(--paper); color: var(--ink); font: 800 .8rem/1.15 var(--body); text-align: center; }
+.tbox.claimed::before { display: none; }
+.tbox.claimed span { text-shadow: none; }
+.tbox.claimed.mine { background: var(--sun); animation: pop .4s cubic-bezier(.3,1.6,.5,1); }
+
+/* page 3: flip cards */
+.flips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .flips { grid-template-columns: 1fr; } }
+.flip { perspective: 900px; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font: inherit; color: inherit; min-height: 230px; }
+.flip .faces { position: relative; display: grid; height: 100%; transition: transform .7s cubic-bezier(.3,1.3,.5,1); transform-style: preserve-3d; }
+.flip.on .faces { transform: rotateY(180deg); }
+.flip .face { grid-area: 1 / 1; backface-visibility: hidden; border: 3px solid var(--ink); border-radius: 22px; box-shadow: 6px 6px 0 var(--ink); padding: 18px; display: grid; align-content: center; gap: 8px; }
+.flip .front { background: var(--paper); text-align: center; }
+.flip .back { transform: rotateY(180deg); color: var(--paper); }
+.flip.adam .back { background: #5d6178; }
+.flip.jesus .back { background: var(--leaf); }
+.flip .big { font: 800 var(--step-2)/1 var(--display); }
+.flip ul { margin: 0; padding-left: 20px; font-weight: 700; }
+
+/* page 4: true/false */
+.tf { display: grid; gap: 12px; }
+.tf .st { display: grid; gap: 8px; background: var(--paper); border: 3px solid var(--ink); border-radius: 18px; padding: 14px; }
+.tf .st p { font-weight: 800; font-size: var(--step-1); }
+.tf .fix { font-weight: 700; color: var(--ink-soft); }
+.tf .st.right { border-color: var(--leaf); box-shadow: 4px 4px 0 var(--leaf); }
+
+/* page 5: sort */
+.pool { display: flex; flex-wrap: wrap; gap: 10px; min-height: 60px; }
+.sort-card { touch-action: none; user-select: none; font: 800 var(--step-0)/1.25 var(--body); color: var(--ink); background: var(--paper); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 14px; cursor: grab; box-shadow: 3px 3px 0 var(--ink); position: relative; z-index: 1; }
+.sort-card.selected { background: var(--sun); }
+.sort-card.dragging { z-index: 30; cursor: grabbing; box-shadow: 8px 8px 0 var(--ink); }
+.sort-card.done { cursor: default; box-shadow: none; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sort-col { display: grid; align-content: start; gap: 8px; min-height: 200px; border: 3px dashed var(--ink); border-radius: 20px; padding: 12px; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.sort-col.adam { background: #e4e6ee; }
+.sort-col.jesus { background: #d3f5e2; }
+.sort-col h3 { display: flex; justify-content: space-between; align-items: baseline; }
+.sort-col h3 small { font: 800 .85rem/1 var(--body); color: var(--ink-soft); }
+.sort-col .sort-card.done { width: 100%; }
+.sort-col.adam .sort-card.done { background: #5d6178; color: var(--paper); }
+.sort-col.jesus .sort-card.done { background: var(--leaf); color: var(--paper); }
+
+/* page 6: correct the mistakes */
+.fixes { display: grid; gap: 12px; }
+.fixline { background: var(--paper); border: 3px solid var(--ink); border-radius: 18px; padding: 14px; display: grid; gap: 10px; }
+.fixline p { font-weight: 700; font-size: var(--step-1); line-height: 1.45; }
+.oops { font: 800 1em/1.2 var(--body); color: #d6402f; background: #ffe2de; border: 2px solid #d6402f; border-radius: 10px; padding: 1px 8px; cursor: pointer; text-decoration: line-through wavy; }
+.oops.fixed { color: var(--paper); background: var(--leaf); border-color: var(--ink); text-decoration: none; cursor: default; }
+.options { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* page 7: fill in */
+.blank { display: inline-block; min-width: 5.5em; border-bottom: 4px solid var(--ink); text-align: center; font-weight: 800; color: var(--grape); padding: 0 6px; }
+.blank.active { background: #fff3c4; border-radius: 8px 8px 0 0; animation: glow 1.2s ease-in-out infinite alternate; }
+@keyframes glow { to { background: #ffe58f; } }
+.blank.filled { color: var(--leaf); }
+.bank { display: flex; flex-wrap: wrap; gap: 10px; }
+.fill p { font-weight: 700; font-size: var(--step-1); line-height: 1.7; }
+.fill { display: grid; gap: 12px; }
+
+/* page 8: memory verse */
+.mv { font-family: var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.25; }
+.mv .w { transition: color .3s, background .3s; border-radius: 6px; }
+.mv .w.hid { color: transparent; background: #ece6ff; box-shadow: inset 0 -4px 0 var(--grape); }
+.attr { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; }
+.attr .badge { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: var(--sun); border: 3px solid var(--ink); font: 800 2.4rem/1 var(--display); box-shadow: 4px 4px 0 var(--ink); }
+
+/* page 9: vocab + discussion */
+.match { display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px; }
+.match .col { display: grid; gap: 10px; align-content: start; }
+.mt { font: 800 var(--step-0)/1.3 var(--body); text-align: left; background: var(--paper); color: var(--ink); border: 3px solid var(--ink); border-radius: 14px; padding: 12px; cursor: pointer; min-height: 52px; }
+.mt.word { font-family: var(--display); font-size: 1.25rem; }
+.mt.sel { background: var(--sun); }
+.mt.ok { background: var(--leaf); color: var(--paper); cursor: default; }
+.disc { display: grid; gap: 10px; }
+.qa { text-align: left; font: inherit; color: inherit; background: var(--paper); border: 3px solid var(--ink); border-radius: 16px; padding: 12px 14px; cursor: pointer; display: grid; gap: 6px; }
+.qa b { font-size: var(--step-0); }
+.qa .ans { color: var(--teal); font-weight: 800; }
+.qa .tapme { color: var(--ink-soft); font-weight: 700; font-size: .9rem; }
+
+/* page 10: two paths */
+.paths { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; }
+@media (max-width: 760px) { .paths { grid-template-columns: 1fr; } .paths .vs { justify-self: center; } }
+.path { border: 3px solid var(--ink); border-radius: 22px; padding: 16px; display: grid; gap: 6px; box-shadow: 6px 6px 0 var(--ink); color: var(--paper); }
+.path.adam { background: #5d6178; }
+.path.jesus { background: var(--leaf); }
+.path .big { font: 800 var(--step-2)/1 var(--display); }
+.path ol { margin: 0; padding-left: 22px; font-weight: 700; }
+.vs { align-self: center; font: 800 1.6rem/1 var(--display); background: var(--sun); border: 3px solid var(--ink); border-radius: 50%; width: 64px; height: 64px; display: grid; place-items: center; }
 .prayer { font-style: italic; }
 
-/* page bar */
+/* leader notes + page bar */
+.notes { display: none; background: #26244d; color: #fff; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-size: .95rem; }
+body.show-notes .notes { display: block; }
+.notes b { color: var(--sun); }
 .bar {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  display: flex; align-items: center; gap: 10px;
   padding-block: 10px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   background: var(--paper); border-top: 3px solid var(--ink);
 }
-.dots { display: flex; gap: 8px; }
-.dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); padding: 0; cursor: pointer; }
-.dot[aria-current="true"] { background: var(--coral); transform: scale(1.2); }
+.dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; flex: 1; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); padding: 0; cursor: pointer; }
+.dot[aria-current="true"] { background: var(--coral); transform: scale(1.25); }
 .count { font: 800 .95rem/1 var(--body); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-.bar .btn { padding: 10px 16px; }
-@media (max-width: 480px) { .count { display: none; } .bar .btn { padding: 10px 12px; } }
-
-.bar { flex-wrap: nowrap; }
-.music { margin-left: auto; }
+.bar .btn { padding: 10px 14px; }
 .music .note { display: inline-block; font-size: 1.15em; }
 .music[aria-pressed="true"] { background: var(--sun); }
 .music[aria-pressed="true"] .note { animation: bob .6s ease-in-out infinite alternate; }
+#notes-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 @keyframes bob { from { transform: translateY(2px) rotate(-8deg); } to { transform: translateY(-3px) rotate(8deg); } }
-@media (max-width: 480px) { #music-label { display: none; } }
+@media (max-width: 640px) { .lbl, .dots { display: none; } .count { flex: 1; text-align: center; } .bar .btn { padding: 10px 11px; } }
 
-#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
-
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
@@ -199,237 +247,280 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
 
 <main class="deck" id="deck">
 
-  <!-- PAGE 1 -->
-  <section class="slide on" aria-label="Page 1 of 5">
+  <!-- 1 · TITLE -->
+  <section class="slide on" aria-label="Page 1" data-notes="<b>Lesson 9 · Romans 5:12–21.</b> Main truth: Jesus’s righteousness defeated sin. God’s attribute: God is gracious. Tap the gift to open it.">
     <div class="inner">
-      <span class="ref">Romans 5:1–11 · Kids Lesson</span>
-      <div class="two">
-        <div style="display:grid;gap:14px">
-          <h1>Friends with God again!</h1>
-          <p class="lead">Have you ever had a fight with a friend, and then made up? Today we learn a big Bible word for making up.</p>
-          <div class="row"><button class="btn coral" id="join-btn">Put the heart back together</button></div>
-          <div class="card define" id="define" hidden>
-            <span class="word">Reconcile</span>
-            <span class="say-it">Say it: REK-un-syle</span>
-            <p>To <b>reconcile</b> means to become friends again after being apart. Romans 5 says Jesus made a way for us to be friends with God again.</p>
+      <div class="top"><span class="ref">Romans · Lesson 9</span><span class="tag">Romans 5:12–21</span></div>
+      <div class="hero">
+        <div class="stack" style="gap:16px">
+          <h1>God’s Gift of Righteousness</h1>
+          <p class="lead">Today we meet two men whose choices changed the whole world: <b>Adam</b> and <b>Jesus</b>.</p>
+          <div class="row"><button class="btn coral" id="open-gift">Open the gift</button></div>
+          <div class="card stack" id="main-truth" hidden style="animation:pop .4s cubic-bezier(.3,1.6,.5,1)">
+            <span class="tag" style="justify-self:start">Main truth</span>
+            <h2 class="truth">Jesus’s righteousness defeated sin.</h2>
+            <p><b>God is gracious:</b> God shows kindness to people who deserve His punishment.</p>
           </div>
         </div>
-        <div class="heart-wrap">
-          <svg class="heart" id="heart" viewBox="0 0 200 190" role="img" aria-label="A heart broken in two halves">
-            <g class="half l">
-              <path d="M100 60 C 85 25, 30 15, 18 55 C 6 95, 50 135, 100 175 L 108 140 L 92 115 L 110 88 Z" fill="#ff6a5c" stroke="#26244d" stroke-width="5" stroke-linejoin="round"/>
-            </g>
-            <g class="half r">
-              <path d="M100 60 C 115 25, 170 15, 182 55 C 194 95, 150 135, 100 175 L 108 140 L 92 115 L 110 88 Z" fill="#ff8a7e" stroke="#26244d" stroke-width="5" stroke-linejoin="round"/>
-            </g>
-            <path class="crack" d="M100 60 L110 88 L92 115 L108 140 L100 175" fill="none" stroke="#26244d" stroke-width="4" stroke-linejoin="round"/>
-            <g class="shine" fill="#ffc22e" stroke="#26244d" stroke-width="3">
-              <path d="M24 12 l5 11 11 5 -11 5 -5 11 -5 -11 -11 -5 11 -5z"/>
-              <path d="M178 120 l4 8 8 4 -8 4 -4 8 -4 -8 -8 -4 8 -4z"/>
-              <path d="M160 6 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAGE 2 -->
-  <section class="slide" aria-label="Page 2 of 5">
-    <div class="inner">
-      <span class="ref">Romans 5:6, 10</span>
-      <h2>Uh-oh, a big gap</h2>
-      <p class="lead">Sin means choosing our own way instead of God’s way. Sin made a huge gap between us and God. Can we jump across by ourselves? Tap a way to try!</p>
-      <svg class="scene" id="gap-scene" viewBox="0 0 400 200" role="img" aria-label="A kid on one cliff and God on the other, with a deep gap between">
-        <circle cx="340" cy="62" r="30" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
-        <g stroke="#ffc22e" stroke-width="5" stroke-linecap="round">
-          <line x1="340" y1="16" x2="340" y2="24"/><line x1="386" y1="62" x2="378" y2="62"/><line x1="294" y1="62" x2="302" y2="62"/>
-          <line x1="372" y1="30" x2="366" y2="36"/><line x1="308" y1="30" x2="314" y2="36"/>
-        </g>
-        <text x="340" y="69" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#26244d">God</text>
-        <path d="M0 120 H130 L150 200 H0 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
-        <path d="M270 120 H400 V200 H250 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
-        <text x="200" y="170" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="12" fill="#57557f">THE GAP OF SIN</text>
-        <g id="kid2">
-          <circle cx="80" cy="88" r="10" fill="#ffd6c2" stroke="#26244d" stroke-width="3"/>
-          <path d="M70 120 L72 100 Q80 96 88 100 L90 120 Z" fill="#6b46d6" stroke="#26244d" stroke-width="3" stroke-linejoin="round"/>
-        </g>
-      </svg>
-      <div class="row" id="tries">
-        <button class="btn" data-try="Being really, really good">Be really good</button>
-        <button class="btn" data-try="Trying super hard">Try super hard</button>
-        <button class="btn" data-try="Doing lots of nice things">Do lots of nice things</button>
-      </div>
-      <p class="say" id="gap-say" aria-live="polite"></p>
-      <div class="card verse" id="gap-verse" hidden>“For while we were yet weak, at the right time Christ died for the ungodly.”<cite>Romans 5:6 (WEB)</cite></div>
-    </div>
-  </section>
-
-  <!-- PAGE 3 -->
-  <section class="slide" aria-label="Page 3 of 5">
-    <div class="inner">
-      <span class="ref">Romans 5:8–10 · Memory verse</span>
-      <h2>God built the bridge!</h2>
-      <div class="two">
-        <div style="display:grid;gap:14px">
-          <p class="lead">We could not cross the gap, so God came to us. Jesus died on the cross for our sins and rose again. The cross is the bridge back to God!</p>
-          <div class="row">
-            <button class="btn coral" id="build-btn">Build the bridge</button>
-            <button class="btn leaf" id="walk-btn" disabled>Walk across</button>
-          </div>
-          <p class="say good" id="bridge-say" aria-live="polite"></p>
-        </div>
-        <svg class="scene" id="bridge-scene" viewBox="0 0 400 200" role="img" aria-label="The cross becomes a bridge across the gap">
-          <circle cx="340" cy="62" r="30" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
-          <text x="340" y="69" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#26244d">God</text>
-          <path d="M0 120 H130 L150 200 H0 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
-          <path d="M270 120 H400 V200 H250 Z" fill="#23a865" stroke="#26244d" stroke-width="4"/>
-          <g id="cross" opacity="0">
-            <rect x="194" y="34" width="12" height="86" rx="3" fill="#a0612c" stroke="#26244d" stroke-width="3"/>
-            <rect x="172" y="54" width="56" height="12" rx="3" fill="#a0612c" stroke="#26244d" stroke-width="3"/>
+        <svg class="gift-art" id="gift-art" viewBox="0 0 200 200" role="img" aria-label="A wrapped gift box">
+          <g class="glow" stroke="#26244d" stroke-width="3" fill="#ffc22e">
+            <path d="M100 4 l7 16 16 7 -16 7 -7 16 -7 -16 -16 -7 16 -7z"/>
+            <path d="M40 26 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z"/>
+            <path d="M160 30 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z"/>
           </g>
-          <rect id="plank" x="128" y="116" width="144" height="12" rx="3" fill="#c98446" stroke="#26244d" stroke-width="3" style="transform-origin:128px 122px;transform:scaleX(0)"/>
-          <g id="kid3">
-            <circle cx="80" cy="88" r="10" fill="#ffd6c2" stroke="#26244d" stroke-width="3"/>
-            <path d="M70 120 L72 100 Q80 96 88 100 L90 120 Z" fill="#6b46d6" stroke="#26244d" stroke-width="3" stroke-linejoin="round"/>
-          </g>
-          <g id="hearts" opacity="0" fill="#ff6a5c" stroke="#26244d" stroke-width="2.5">
-            <path d="M300 40 c-6 -10 -20 -4 -14 6 l14 12 14 -12 c6 -10 -8 -16 -14 -6z"/>
-            <path d="M372 104 c-4 -7 -14 -3 -10 4 l10 9 10 -9 c4 -7 -6 -11 -10 -4z"/>
+          <rect x="34" y="96" width="132" height="92" rx="10" fill="#6b46d6" stroke="#26244d" stroke-width="5"/>
+          <rect x="92" y="96" width="16" height="92" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
+          <g class="lid">
+            <rect x="24" y="72" width="152" height="28" rx="8" fill="#8f6cf0" stroke="#26244d" stroke-width="5"/>
+            <rect x="92" y="72" width="16" height="28" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
+            <path d="M100 72 C 70 36, 50 60, 100 72 C 150 60, 130 36, 100 72 Z" fill="#ffc22e" stroke="#26244d" stroke-width="4"/>
           </g>
         </svg>
       </div>
-      <div class="card verse">“But God commends his own love toward us, in that <mark>while we were yet sinners, Christ died for us.</mark>”<cite>Romans 5:8 (WEB) · Say it 3 times together!</cite></div>
     </div>
   </section>
 
-  <!-- PAGE 4 -->
-  <section class="slide" aria-label="Page 4 of 5">
+  <!-- 2 · BUILD COMMUNITY: INHERITANCE -->
+  <section class="slide" aria-label="Page 2" data-notes="<b>Build Community · 10 min.</b> Offer each child an item. They keep it or swap it for a numbered treasure box, which they must keep. Then ask: How did you feel about your inheritance? What makes an inheritance good or bad? What else might you inherit?">
     <div class="inner">
-      <span class="ref">Romans 5:1–5, 11</span>
-      <h2>Friends of God get gifts!</h2>
-      <div class="row" style="justify-content:space-between">
-        <p class="lead">When we trust Jesus, God gives us presents that last forever. Tap each one to open it.</p>
-        <span class="meter" id="gift-meter" aria-live="polite">0 of 4 opened</span>
+      <div class="top"><span class="ref">Build community</span><span class="tag">Game</span></div>
+      <h2>What will you inherit?</h2>
+      <p class="lead"><b>Inherit</b> means getting something because someone in your family had it before you. Let’s play! Take the item you’re offered, or trade it for a mystery treasure box.</p>
+      <div class="two">
+        <div class="card offer">
+          <span class="tag" style="justify-self:start">You are offered</span>
+          <span class="item" id="offer-item">?</span>
+          <div class="row">
+            <button class="btn" id="offer-btn">Offer an item</button>
+            <button class="btn leaf" id="keep-btn" disabled>Keep it</button>
+            <button class="btn coral" id="swap-btn" disabled>Pick a box</button>
+          </div>
+          <p class="say" id="inherit-say" aria-live="polite"></p>
+        </div>
+        <div class="stack">
+          <div class="boxes" id="boxes"></div>
+          <p style="font-weight:800" id="claimed-count">0 of 12 claimed</p>
+        </div>
       </div>
-      <div class="gifts">
-        <button class="gift" data-c="peace" aria-label="Open gift 1">
-          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#3aa6f0" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#7cc6ff" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#ffc22e" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#ffc22e" stroke="#26244d" stroke-width="4"/></svg></span>
-          <span class="tap">Tap to open</span>
-          <span class="open"><span class="name">Peace</span><small>VERSE 1</small><span>We have peace with God. No more being enemies. God is not mad at us anymore.</span></span>
-        </button>
-        <button class="gift" data-c="hope" aria-label="Open gift 2">
-          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#23a865" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#5fd391" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#ff6a5c" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#ff6a5c" stroke="#26244d" stroke-width="4"/></svg></span>
-          <span class="tap">Tap to open</span>
-          <span class="open"><span class="name">Hope</span><small>VERSES 2–4</small><span>Even on hard days, God is helping us grow stronger. Our hope in God never lets us down.</span></span>
-        </button>
-        <button class="gift" data-c="love" aria-label="Open gift 3">
-          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#ff6a5c" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#ff9b91" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#6b46d6" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#6b46d6" stroke="#26244d" stroke-width="4"/></svg></span>
-          <span class="tap">Tap to open</span>
-          <span class="open"><span class="name">Love</span><small>VERSE 5</small><span>God pours his love into our hearts by the Holy Spirit, like filling a cup all the way up.</span></span>
-        </button>
-        <button class="gift" data-c="joy" aria-label="Open gift 4">
-          <span class="box"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="40" width="80" height="52" rx="6" fill="#ffc22e" stroke="#26244d" stroke-width="5"/><rect x="5" y="28" width="90" height="18" rx="5" fill="#ffe58f" stroke="#26244d" stroke-width="5"/><rect x="44" y="28" width="12" height="64" fill="#3aa6f0" stroke="#26244d" stroke-width="4"/><path d="M50 28 C 30 6, 18 22, 50 28 C 82 22, 70 6, 50 28 Z" fill="#3aa6f0" stroke="#26244d" stroke-width="4"/></svg></span>
-          <span class="tap">Tap to open</span>
-          <span class="open"><span class="name">Joy</span><small>VERSE 11</small><span>We are so happy in God! Jesus made us his friends, and that is the best news ever.</span></span>
-        </button>
-      </div>
-      <div class="card verse" id="gift-verse" hidden>“Being therefore justified by faith, we have <mark>peace with God</mark> through our Lord Jesus Christ.”<cite>Romans 5:1 (WEB)</cite></div>
     </div>
   </section>
 
-  <!-- PAGE 5 -->
-  <section class="slide" aria-label="Page 5 of 5">
+  <!-- 3 · LESSON INTRODUCTION -->
+  <section class="slide" aria-label="Page 3" data-notes="<b>Lesson introduction.</b> Since Adam, every person has inherited sin and death. God is gracious. Through Jesus, believers inherit righteousness. Flip both cards.">
     <div class="inner">
-      <span class="ref">Review &amp; live it</span>
-      <div class="row" style="justify-content:space-between">
-        <h2>Quick quiz!</h2>
-        <span class="stars" id="stars" aria-live="polite">☆ ☆ ☆</span>
+      <div class="top"><span class="ref">Lesson introduction</span></div>
+      <h2>Two family inheritances</h2>
+      <p class="lead">Adam, the first man, disobeyed God. Ever since, every person has inherited sin and death. But <b>God is gracious</b>. He sent His perfect Son, Jesus. Tap each card to flip it.</p>
+      <div class="flips">
+        <button class="flip adam" aria-pressed="false">
+          <span class="faces">
+            <span class="face front"><span class="big">From Adam…</span><span>we all inherit</span><span style="font-weight:800;color:var(--ink-soft)">Tap to flip</span></span>
+            <span class="face back"><span class="big">Sin &amp; death</span><ul><li>We are born wanting our own way</li><li>Everyone sins</li><li>Sin separates us from God</li></ul></span>
+          </span>
+        </button>
+        <button class="flip jesus" aria-pressed="false">
+          <span class="faces">
+            <span class="face front"><span class="big">Through Jesus…</span><span>believers inherit</span><span style="font-weight:800;color:var(--ink-soft)">Tap to flip</span></span>
+            <span class="face back"><span class="big">Righteousness &amp; life</span><ul><li>Jesus lived a perfect life</li><li>He died to pay for our sin</li><li>We get peace with God and join His family</li></ul></span>
+          </span>
+        </button>
       </div>
-      <div class="card quiz" id="quiz">
-        <div class="q" data-answer="0">
-          <span class="ask">1. What does “reconcile” mean?</span>
-          <div class="choices"><button class="choice">Become friends again</button><button class="choice">Go to sleep</button><button class="choice">Win a race</button></div>
-        </div>
-        <div class="q" data-answer="1">
-          <span class="ask">2. Who built the bridge back to God?</span>
-          <div class="choices"><button class="choice">Me, by being good</button><button class="choice">Jesus</button><button class="choice">Nobody</button></div>
-        </div>
-        <div class="q" data-answer="2">
-          <span class="ask">3. God showed his love while we were…</span>
-          <div class="choices"><button class="choice">Being perfect</button><button class="choice">Asleep</button><button class="choice">Still sinners</button></div>
+    </div>
+  </section>
+
+  <!-- 4 · TRUE OR FALSE -->
+  <section class="slide" aria-label="Page 4" data-notes="<b>Discover Truth · 25 min (pages 4–7).</b> Read Romans 5:12–14 aloud. Kids decide true or false. A false answer shows the correction.">
+    <div class="inner">
+      <div class="top"><span class="ref">Romans 5:12–14</span><span class="tag">True or false?</span></div>
+      <h2>True or false?</h2>
+      <p class="lead">Read Romans 5:12–14 together. Then decide!</p>
+      <div class="tf" id="tf"></div>
+      <p class="say good" id="tf-say" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 5 · ADAM OR JESUS -->
+  <section class="slide" aria-label="Page 5" data-notes="Read Romans 5:15–17. Kids drag each statement into the Adam or Jesus column. On a touch screen, tap a statement and then tap a column.">
+    <div class="inner">
+      <div class="top"><span class="ref">Romans 5:15–17</span><span class="tag">Sort it</span></div>
+      <h2>Adam or Jesus?</h2>
+      <p class="lead">Drag each box to the right person. (Or tap a box, then tap a column.)</p>
+      <div class="pool" id="pool"></div>
+      <div class="cols">
+        <div class="sort-col adam" data-who="adam" role="button" tabindex="0" aria-label="Adam column"><h3>Adam <small id="adam-n">0 / 3</small></h3></div>
+        <div class="sort-col jesus" data-who="jesus" role="button" tabindex="0" aria-label="Jesus column"><h3>Jesus <small id="jesus-n">0 / 3</small></h3></div>
+      </div>
+      <p class="say good" id="sort-say" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 6 · CORRECT THE MISTAKES -->
+  <section class="slide" aria-label="Page 6" data-notes="Read Romans 5:18–19. Each sentence has one wrong word, shown crossed out in red. Tap it and choose the right word.">
+    <div class="inner">
+      <div class="top"><span class="ref">Romans 5:18–19</span><span class="tag">Fix it</span></div>
+      <h2>Correct the mistakes</h2>
+      <p class="lead">Oops! Each sentence has one wrong word. Tap the red word and pick the right one.</p>
+      <div class="fixes" id="fixes"></div>
+      <p class="say good" id="fix-say" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 7 · FIND THE ANSWER -->
+  <section class="slide" aria-label="Page 7" data-notes="Read Romans 5:20–21. Kids fill each glowing blank from the word bank. Afterwards, ask them to sum up in one sentence the family line of Adam, then the family line of Jesus.">
+    <div class="inner">
+      <div class="top"><span class="ref">Romans 5:20–21</span><span class="tag">Fill it in</span></div>
+      <h2>Find the answer</h2>
+      <div class="card fill">
+        <p>1. God’s law showed people how much they <span class="blank" data-a="sin"></span>.</p>
+        <p>2. Where sin grew bigger, God’s <span class="blank" data-a="grace"></span> grew even bigger!</p>
+        <p>3. Sin ruled and brought <span class="blank" data-a="death"></span>.</p>
+        <p>4. Grace rules through righteousness and brings <span class="blank" data-a="eternal life"></span> through Jesus Christ our Lord.</p>
+      </div>
+      <div class="bank" id="bank"></div>
+      <p class="say" id="fill-say" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 8 · GOD IS GRACIOUS + MEMORY VERSE -->
+  <section class="slide" aria-label="Page 8" data-notes="<b>Memory verse.</b> Say it together, then tap “Hide a word” again and again until the kids can say the whole verse from memory.">
+    <div class="inner">
+      <div class="top"><span class="ref">Memory verse</span><span class="tag">Romans 5:18</span></div>
+      <div class="card attr">
+        <span class="badge" aria-hidden="true">G</span>
+        <div class="stack" style="gap:4px">
+          <h3>God is gracious</h3>
+          <p>Grace is God’s powerful kindness poured out on people who don’t deserve it. We can’t earn it by being good. It’s a gift!</p>
         </div>
       </div>
-      <h2>Be a reconciler this week</h2>
-      <p class="lead">God made peace with us, so we can make peace with others. Pick one challenge.</p>
-      <div class="challenges" id="challenges">
-        <button class="challenge" aria-pressed="false"><b>Say sorry</b><span>Tell someone you hurt, “I’m sorry. Will you forgive me?”</span></button>
-        <button class="challenge" aria-pressed="false"><b>Forgive</b><span>When someone says sorry to you, say, “I forgive you.”</span></button>
-        <button class="challenge" aria-pressed="false"><b>Make a card</b><span>Draw a picture for someone you argued with.</span></button>
+      <div class="card stack">
+        <p class="mv" id="mv"></p>
+        <cite style="font:800 .9rem/1 var(--body);font-style:normal;color:var(--ink-soft)">Romans 5:18 (NIV)</cite>
       </div>
-      <p class="say good" id="pick-say" aria-live="polite"></p>
-      <div class="card prayer"><b style="font-style:normal">Let’s pray:</b> Dear God, thank you for loving me even when I sin. Thank you, Jesus, for being the bridge so I can be your friend. Help me make peace with others this week. Amen.</div>
+      <div class="row">
+        <button class="btn" id="hide-word">Hide a word</button>
+        <button class="btn alt" id="show-all">Show all</button>
+        <span class="say" id="mv-say" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · VOCABULARY + DISCUSSION -->
+  <section class="slide" aria-label="Page 9" data-notes="Match the words, then use the discussion questions. Leader tip: give kids time to think before giving the ‘right’ answer. Their surprising answers can make the talk richer.">
+    <div class="inner">
+      <div class="top"><span class="ref">Words &amp; talk</span></div>
+      <h2>Match the Bible words</h2>
+      <p class="lead">Tap a word, then tap what it means.</p>
+      <div class="match">
+        <div class="col" id="words"></div>
+        <div class="col" id="defs"></div>
+      </div>
+      <h3>Let’s talk</h3>
+      <div class="disc">
+        <button class="qa"><b>What came into the world because of Adam’s sin?</b><span class="tapme">Tap for answer</span><span class="ans" hidden>Sin and death came to all people (Romans 5:12).</span></button>
+        <button class="qa"><b>Who is the one man who brought the gift of God’s grace?</b><span class="tapme">Tap for answer</span><span class="ans" hidden>Jesus Christ (Romans 5:15)!</span></button>
+        <button class="qa"><b>How would you explain what Adam and Jesus each did for your life?</b><span class="tapme">Tap for a hint</span><span class="ans" hidden>Adam’s choice gave us sin. Jesus’s obedience gives believers righteousness and life.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · CLOSING -->
+  <section class="slide" aria-label="Page 10" data-notes="<b>Closing · 5 min.</b> Two men, two choices, two results. Ask: What have you learned about what we get from Adam, and what God gives us through Christ? Pray, then introduce next week’s question.">
+    <div class="inner">
+      <div class="top"><span class="ref">Closing</span></div>
+      <h2>Two men, two choices, two results</h2>
+      <div class="paths">
+        <div class="path adam">
+          <span class="big">Adam</span>
+          <ol><li>Chose to disobey God</li><li>Sin spoiled the world</li><li>Death came to all people</li></ol>
+        </div>
+        <span class="vs">vs</span>
+        <div class="path jesus">
+          <span class="big">Jesus</span>
+          <ol><li>Chose to obey His Father</li><li>Died on the cross for our sin</li><li>Believers get righteousness and eternal life!</li></ol>
+        </div>
+      </div>
+      <p class="lead"><b>God is gracious.</b> He didn’t leave us stuck in Adam’s sin. <span class="truth">Jesus’s righteousness defeated sin!</span></p>
+      <div class="row"><button class="btn leaf" id="celebrate">Celebrate the good news!</button></div>
+      <div class="card prayer"><b style="font-style:normal">Let’s pray:</b> Thank you, God, for the gift of your grace. Thank you for sending Jesus to die for our sin. Thank you that your grace brings eternal life to all who trust in Jesus as Lord. Amen.</div>
+      <div class="card stack">
+        <span class="tag" style="justify-self:start">Next week · Romans 6</span>
+        <p style="font-weight:800;font-size:var(--step-1)">Since God forgives us because of Jesus, is it okay to do whatever we want? Think about it… we’ll find out next week!</p>
+      </div>
     </div>
   </section>
 </main>
 
+<div class="notes" id="notes" aria-live="polite"></div>
 <nav class="bar" aria-label="Pages">
-  <button class="btn alt" id="prev" aria-label="Previous page">◀ Back</button>
+  <button class="btn alt" id="prev" aria-label="Previous page">◀<span class="lbl"> Back</span></button>
   <div class="dots" id="dots"></div>
-  <span class="count" id="count">1 / 5</span>
-  <button class="btn alt music" id="music" aria-pressed="false" title="Turn music on or off (M)"><span class="note" aria-hidden="true">♪</span> <span id="music-label">Music off</span></button>
-  <button class="btn" id="next" aria-label="Next page">Next ▶</button>
+  <span class="count" id="count">1 / 10</span>
+  <button class="btn alt" id="notes-btn" aria-pressed="false" title="Leader notes (L)">✎<span class="lbl"> Notes</span></button>
+  <button class="btn alt music" id="music" aria-pressed="false" title="Music on or off (M)"><span class="note" aria-hidden="true">♪</span><span class="lbl" id="music-label"> Music off</span></button>
+  <button class="btn" id="next" aria-label="Next page"><span class="lbl">Next </span>▶</button>
 </nav>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
 <script>
 (() => {
-  const slides = [...document.querySelectorAll('.slide')];
-  const dotsEl = document.getElementById('dots');
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let page = 0;
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const shake = (el) => { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); };
 
+  // ---------- pages ----------
+  const slides = $$('.slide');
+  const dotsEl = $('#dots');
+  let page = 0;
   slides.forEach((_, i) => {
     const d = document.createElement('button');
-    d.className = 'dot';
-    d.setAttribute('aria-label', 'Go to page ' + (i + 1));
+    d.className = 'dot'; d.setAttribute('aria-label', 'Go to page ' + (i + 1));
     d.addEventListener('click', () => go(i));
     dotsEl.appendChild(d);
   });
-
   function go(i) {
     page = Math.max(0, Math.min(slides.length - 1, i));
     slides.forEach((s, k) => s.classList.toggle('on', k === page));
-    [...dotsEl.children].forEach((d, k) => d.setAttribute('aria-current', k === page ? 'true' : 'false'));
+    $$('.dot').forEach((d, k) => d.setAttribute('aria-current', k === page ? 'true' : 'false'));
     document.body.dataset.page = page;
-    document.getElementById('count').textContent = (page + 1) + ' / ' + slides.length;
-    document.getElementById('prev').disabled = page === 0;
-    document.getElementById('next').disabled = page === slides.length - 1;
+    $('#count').textContent = (page + 1) + ' / ' + slides.length;
+    $('#prev').disabled = page === 0;
+    $('#next').disabled = page === slides.length - 1;
+    $('#notes').innerHTML = slides[page].dataset.notes || '';
     slides[page].scrollTop = 0;
   }
-  document.getElementById('prev').onclick = () => go(page - 1);
-  document.getElementById('next').onclick = () => go(page + 1);
+  $('#prev').onclick = () => go(page - 1);
+  $('#next').onclick = () => go(page + 1);
+  const toggleNotes = () => {
+    const on = !document.body.classList.contains('show-notes');
+    document.body.classList.toggle('show-notes', on);
+    $('#notes-btn').setAttribute('aria-pressed', on ? 'true' : 'false');
+  };
+  $('#notes-btn').onclick = toggleNotes;
   addEventListener('keydown', (e) => {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
     if (e.key === 'ArrowRight' || e.key === 'PageDown') go(page + 1);
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(page - 1);
+    if (e.key.toLowerCase() === 'l') toggleNotes();
+    if (e.key.toLowerCase() === 'm') setMusic(!musicOn);
   });
-  let sx = null;
-  document.getElementById('deck').addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
-  document.getElementById('deck').addEventListener('touchend', (e) => {
-    if (sx === null) return;
-    const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 70) go(page + (dx < 0 ? 1 : -1));
+  let sx = null, sy = null;
+  $('#deck').addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  $('#deck').addEventListener('touchend', (e) => {
+    if (sx === null || e.target.closest('.sort-card')) { sx = null; return; }
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 1.5) go(page + (dx < 0 ? 1 : -1));
     sx = null;
   });
   go(0);
 
-  // ---------- Music & sound effects (all synthesized, original tune) ----------
+  // ---------- music & sound effects (synthesized; original tune) ----------
   const NOTE = (n) => {
     const m = /^([A-G])(#?)(\d)$/.exec(n);
     const semis = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] ? 1 : 0);
     return 440 * Math.pow(2, ((+m[3] + 1) * 12 + semis - 69) / 12);
   };
-  // 8-bar cheerful loop in C major: C G Am F | C F G C
   const MELODY = [
     ['E4', .5], ['G4', .5], ['C5', 1], ['G4', .5], ['E4', .5], ['G4', 1],
     ['D4', .5], ['G4', .5], ['B4', 1], ['A4', .5], ['G4', .5], ['D5', 1],
@@ -441,10 +532,8 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     ['C5', 1.5], ['G4', .5], ['C5', 2],
   ];
   const BASS = [['C3', 'G2'], ['G2', 'D3'], ['A2', 'E3'], ['F2', 'C3'], ['C3', 'G2'], ['F2', 'C3'], ['G2', 'D3'], ['C3', 'G2']];
-  const BPM = 116, BEAT = 60 / BPM;
-
-  let ac = null, master = null, sfxBus = null, musicOn = false, timer = null;
-  let nextTime = 0, mi = 0, beatInLoop = 0;
+  const BEAT = 60 / 116;
+  let ac = null, master = null, sfxBus = null, musicOn = false, timer = null, nextTime = 0, mi = 0, beatInLoop = 0;
   function audio() {
     if (!ac) {
       const AC = window.AudioContext || window.webkitAudioContext;
@@ -456,7 +545,6 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     if (ac.state === 'suspended') ac.resume();
     return ac;
   }
-  // marimba-ish tone: sine + soft overtone with a quick decay
   function tone(freq, t, dur, vol, dest, type = 'sine') {
     const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), g2 = ac.createGain();
     o.type = type; o.frequency.value = freq;
@@ -471,13 +559,12 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
     while (nextTime < ac.currentTime + 0.25) {
       const [n, beats] = MELODY[mi];
       tone(NOTE(n), nextTime, Math.min(0.9, beats * BEAT * 1.6), 0.5, master);
-      // bass on every beat that this note covers
       for (let b = 0; b < beats; b += 0.5) {
         const pos = beatInLoop + b;
         if (Number.isInteger(pos)) {
           const bar = Math.floor(pos / 4) % 8, beat = pos % 4;
           if (beat === 0 || beat === 2) tone(NOTE(BASS[bar][beat === 0 ? 0 : 1]), nextTime + b * BEAT, 0.45, 0.42, master, 'triangle');
-          if (beat === 1 || beat === 3) tone(2400, nextTime + b * BEAT, 0.04, 0.05, master); // soft tick
+          else tone(2400, nextTime + b * BEAT, 0.04, 0.05, master);
         }
       }
       nextTime += beats * BEAT;
@@ -488,9 +575,8 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
   function setMusic(on) {
     if (on && !audio()) return;
     musicOn = on;
-    const btn = document.getElementById('music');
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    document.getElementById('music-label').textContent = on ? 'Music on' : 'Music off';
+    $('#music').setAttribute('aria-pressed', on ? 'true' : 'false');
+    $('#music-label').textContent = on ? ' Music on' : ' Music off';
     if (on) {
       master.gain.cancelScheduledValues(ac.currentTime);
       master.gain.setTargetAtTime(0.16, ac.currentTime, 0.3);
@@ -501,13 +587,8 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
       clearInterval(timer); timer = null;
     }
   }
-  document.getElementById('music').onclick = () => setMusic(!musicOn);
-  addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'm') setMusic(!musicOn); });
-  document.addEventListener('visibilitychange', () => {
-    if (!ac) return;
-    if (document.hidden) ac.suspend(); else ac.resume();
-  });
-
+  $('#music').onclick = () => setMusic(!musicOn);
+  document.addEventListener('visibilitychange', () => { if (ac) (document.hidden ? ac.suspend() : ac.resume()); });
   const sfx = {
     chime() { if (!audio()) return; const t = ac.currentTime; ['C5', 'E5', 'G5', 'C6'].forEach((n, i) => tone(NOTE(n), t + i * 0.09, 0.6, 0.5, sfxBus)); },
     ding() { if (!audio()) return; const t = ac.currentTime; tone(NOTE('G5'), t, 0.4, 0.5, sfxBus); tone(NOTE('C6'), t + 0.1, 0.6, 0.5, sfxBus); },
@@ -520,125 +601,262 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.5, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
       o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.55);
     },
-    step() { if (!audio()) return; tone(NOTE('E5'), ac.currentTime, 0.08, 0.25, sfxBus); },
   };
+  const win = (n = 80) => { sfx.chime(); burst(n); };
 
-  const anim = (el, frames, opts) => el.animate(frames, { duration: reduce ? 1 : opts.duration, easing: opts.easing || 'ease-in-out', fill: 'forwards' }).finished;
-
-  // Page 1: join the heart
-  document.getElementById('join-btn').onclick = (e) => {
-    document.getElementById('heart').classList.add('joined');
-    document.getElementById('heart').setAttribute('aria-label', 'The heart is whole again');
-    document.getElementById('define').hidden = false;
-    e.currentTarget.textContent = 'Friends again!';
+  // ---------- 1 · title gift ----------
+  $('#open-gift').onclick = (e) => {
+    $('#gift-art').classList.add('open');
+    $('#main-truth').hidden = false;
     e.currentTarget.disabled = true;
-    sfx.chime();
-    burst(40);
+    e.currentTarget.textContent = 'What a gift!';
+    win(50);
   };
 
-  // Page 2: try to jump the gap
-  const kid2 = document.getElementById('kid2');
-  const tried = new Set();
-  let jumping = false;
-  document.querySelectorAll('#tries .btn').forEach((b) => {
-    b.onclick = async () => {
-      if (jumping) return;
-      jumping = true;
-      const say = document.getElementById('gap-say');
-      say.className = 'say'; say.textContent = b.dataset.try + '… JUMP!';
-      sfx.pop();
-      setTimeout(sfx.boing, reduce ? 0 : 850);
-      await anim(kid2, [
-        { transform: 'translate(0,0)' },
-        { transform: 'translate(45px,-45px)', offset: .35 },
-        { transform: 'translate(80px,-10px)', offset: .6 },
-        { transform: 'translate(80px,90px)', opacity: 1, offset: .85 },
-        { transform: 'translate(80px,110px)', opacity: 0 }
-      ], { duration: 1500 });
-      say.className = 'say bad';
-      say.textContent = 'Oh no! Not far enough. Nobody can jump this gap alone.';
-      kid2.animate([{ transform: 'translate(0,0)', opacity: 0 }, { transform: 'translate(0,0)', opacity: 1 }], { duration: reduce ? 1 : 500, fill: 'forwards' });
-      tried.add(b.dataset.try);
-      b.disabled = true;
-      if (tried.size >= 2) document.getElementById('gap-verse').hidden = false;
-      if (tried.size === 3) { say.className = 'say good'; say.textContent = 'We need help! Turn the page to see what God did.'; }
-      jumping = false;
-    };
+  // ---------- 2 · inheritance game ----------
+  const ITEMS = ['video game system', 'money for school', 'rock collection', 'bag of old clothes', 'house', 'pet snake', 'toy train set', 'swimming pool', 'boat', 'telescope', 'Bible', 'computer'];
+  const boxItems = shuffle(ITEMS);
+  const claimed = new Set();
+  let offered = null; // index of the box whose item is being offered
+  const boxesEl = $('#boxes');
+  boxItems.forEach((item, i) => {
+    const b = document.createElement('button');
+    b.className = 'tbox'; b.disabled = true;
+    b.innerHTML = `<span>${i + 1}</span>`;
+    b.setAttribute('aria-label', 'Treasure box ' + (i + 1));
+    b.onclick = () => openBox(i);
+    boxesEl.appendChild(b);
+  });
+  const boxBtns = $$('.tbox', boxesEl);
+  const openSlots = () => boxItems.map((_, i) => i).filter((i) => !claimed.has(i));
+  function claim(i) {
+    claimed.add(i);
+    const b = boxBtns[i];
+    b.className = 'tbox claimed mine'; b.disabled = true;
+    b.innerHTML = `<span>${boxItems[i]}</span>`;
+    b.setAttribute('aria-label', 'Box ' + (i + 1) + ': ' + boxItems[i]);
+    setTimeout(() => b.classList.remove('mine'), 1200);
+    $('#claimed-count').textContent = claimed.size + ' of 12 claimed';
+    if (claimed.size === 12) { $('#offer-btn').disabled = true; $('#inherit-say').textContent = 'Everyone has an inheritance! How do you feel about yours?'; win(90); }
+  }
+  $('#offer-btn').onclick = () => {
+    const slots = openSlots();
+    if (!slots.length) return;
+    offered = slots[Math.floor(Math.random() * slots.length)];
+    $('#offer-item').textContent = boxItems[offered];
+    $('#keep-btn').disabled = false; $('#swap-btn').disabled = slots.length < 2;
+    $('#offer-btn').disabled = true;
+    $('#inherit-say').className = 'say'; $('#inherit-say').textContent = 'Keep it, or trade it for a mystery box?';
+    sfx.pop();
+  };
+  $('#keep-btn').onclick = () => {
+    $('#inherit-say').className = 'say good'; $('#inherit-say').textContent = 'You kept the ' + boxItems[offered] + '!';
+    claim(offered); offered = null; sfx.ding();
+    $('#keep-btn').disabled = true; $('#swap-btn').disabled = true; $('#offer-btn').disabled = claimed.size === 12;
+    $('#offer-item').textContent = '?';
+  };
+  $('#swap-btn').onclick = () => {
+    $('#keep-btn').disabled = true; $('#swap-btn').disabled = true;
+    $('#inherit-say').className = 'say'; $('#inherit-say').textContent = 'Tap a numbered treasure box. You must keep what’s inside!';
+    openSlots().forEach((i) => { boxBtns[i].disabled = false; boxBtns[i].classList.add('waiting'); });
+  };
+  function openBox(i) {
+    boxBtns.forEach((b) => { b.classList.remove('waiting'); if (!b.classList.contains('claimed')) b.disabled = true; });
+    claim(i);
+    $('#inherit-say').className = 'say good'; $('#inherit-say').textContent = 'Box ' + (i + 1) + ' had… a ' + boxItems[i] + '!';
+    $('#offer-item').textContent = '?'; offered = null;
+    $('#offer-btn').disabled = claimed.size === 12;
+    boxItems[i] === 'pet snake' || boxItems[i] === 'bag of old clothes' ? sfx.boing() : sfx.chime();
+  }
+
+  // ---------- 3 · flip cards ----------
+  $$('.flip').forEach((f) => f.onclick = () => {
+    f.classList.toggle('on'); f.setAttribute('aria-pressed', f.classList.contains('on'));
+    f.classList.contains('jesus') && f.classList.contains('on') ? sfx.chime() : sfx.pop();
   });
 
-  // Page 3: build the cross bridge and walk across
-  const buildBtn = document.getElementById('build-btn');
-  const walkBtn = document.getElementById('walk-btn');
-  buildBtn.onclick = async () => {
-    buildBtn.disabled = true;
-    const say = document.getElementById('bridge-say');
-    await anim(document.getElementById('cross'), [{ opacity: 0, transform: 'translateY(-40px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 700, easing: 'cubic-bezier(.3,1.5,.5,1)' });
-    await anim(document.getElementById('plank'), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 900 });
-    say.textContent = 'Jesus made the way across!';
-    sfx.ding();
-    walkBtn.disabled = false;
-  };
-  walkBtn.onclick = async () => {
-    walkBtn.disabled = true;
-    const kid = document.getElementById('kid3');
-    const steps = [];
-    for (let i = 0; i <= 10; i++) steps.push({ transform: `translate(${i * 23}px, ${i % 2 ? -6 : 0}px)` });
-    const stepTimer = setInterval(sfx.step, 220);
-    await anim(kid, steps, { duration: 2200, easing: 'linear' });
-    clearInterval(stepTimer);
-    await anim(document.getElementById('hearts'), [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500 });
-    document.getElementById('bridge-say').textContent = 'Friends with God again! That is what “reconciled” means.';
-    sfx.chime();
-    burst(60);
-  };
-
-  // Page 4: open gifts
-  const gifts = [...document.querySelectorAll('.gift')];
-  gifts.forEach((g) => {
-    g.onclick = () => {
-      if (g.classList.contains('opened')) return;
-      g.classList.add('opened');
-      sfx.pop();
-      g.setAttribute('aria-label', g.querySelector('.name').textContent + ' gift, opened');
-      const n = gifts.filter((x) => x.classList.contains('opened')).length;
-      document.getElementById('gift-meter').textContent = n === 4 ? 'All 4 opened!' : n + ' of 4 opened';
-      if (n === 4) { document.getElementById('gift-verse').hidden = false; setTimeout(sfx.chime, 200); burst(70); }
+  // ---------- 4 · true or false ----------
+  const TF = [
+    ['Sin came into the world through one man, Adam.', true, 'True! Romans 5:12'],
+    ['Only Adam died because of his sin.', false, 'False! Death came to all people, because everyone sinned (v. 12).'],
+    ['People sinned even before God gave His law to Moses.', true, 'True! Sin was in the world before the law (v. 13).'],
+    ['Adam’s choice didn’t change anything for anyone else.', false, 'False! Death ruled over people from Adam all the way to Moses (v. 14).'],
+  ];
+  let tfDone = 0;
+  TF.forEach(([text, ans, fix]) => {
+    const st = document.createElement('div');
+    st.className = 'st';
+    st.innerHTML = `<p>${text}</p><div class="row"><button class="btn small leaf">True</button><button class="btn small coral">False</button></div><span class="fix" hidden>${fix}</span>`;
+    const [tBtn, fBtn] = $$('button', st);
+    const pick = (v, btn) => {
+      if (st.classList.contains('right')) return;
+      if (v === ans) {
+        st.classList.add('right'); $('.fix', st).hidden = false;
+        tBtn.disabled = fBtn.disabled = true; btn.disabled = false;
+        tfDone++; sfx.ding();
+        if (tfDone === TF.length) { $('#tf-say').textContent = 'All 4 correct! Sin and death spread to everyone.'; win(70); }
+      } else { shake(st); sfx.boing(); }
     };
+    tBtn.onclick = () => pick(true, tBtn);
+    fBtn.onclick = () => pick(false, fBtn);
+    $('#tf').appendChild(st);
   });
 
-  // Page 5: quiz
-  let score = 0;
-  document.querySelectorAll('.q').forEach((q) => {
-    const answer = +q.dataset.answer;
-    const btns = [...q.querySelectorAll('.choice')];
-    btns.forEach((b, i) => {
-      b.onclick = () => {
-        if (q.dataset.done) return;
-        if (i === answer) {
-          b.classList.add('right');
-          q.dataset.done = '1';
-          btns.forEach((x) => { if (x !== b) x.disabled = true; });
-          score++;
-          document.getElementById('stars').textContent = '★ '.repeat(score) + '☆ '.repeat(3 - score);
-          if (score === 3) { sfx.chime(); burst(140); } else sfx.ding();
-        } else {
-          b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong');
-          sfx.boing();
+  // ---------- 5 · Adam or Jesus (drag or tap) ----------
+  const SORT = [
+    ['One trespass brought death to many people', 'adam'],
+    ['The gift of grace overflowed to many people', 'jesus'],
+    ['One sin brought judgment and condemnation', 'adam'],
+    ['God’s free gift brings justification', 'jesus'],
+    ['Death ruled through this one man', 'adam'],
+    ['Believers rule in life through this one man', 'jesus'],
+  ];
+  const pool = $('#pool');
+  let selected = null, sorted = 0;
+  shuffle(SORT).forEach(([text, who]) => {
+    const c = document.createElement('button');
+    c.className = 'sort-card'; c.textContent = text; c.dataset.who = who;
+    pool.appendChild(c);
+    c.addEventListener('pointerdown', (e) => {
+      if (c.classList.contains('done')) return;
+      const start = { x: e.clientX, y: e.clientY };
+      let dragging = false;
+      c.setPointerCapture(e.pointerId);
+      const move = (ev) => {
+        const dx = ev.clientX - start.x, dy = ev.clientY - start.y;
+        if (!dragging && Math.hypot(dx, dy) > 8) { dragging = true; c.classList.add('dragging'); }
+        if (dragging) c.style.transform = `translate(${dx}px, ${dy}px) rotate(3deg)`;
+      };
+      const up = (ev) => {
+        c.removeEventListener('pointermove', move); c.removeEventListener('pointerup', up); c.removeEventListener('pointercancel', up);
+        c.style.transform = ''; c.classList.remove('dragging');
+        if (dragging) {
+          c.style.visibility = 'hidden';
+          const el = document.elementFromPoint(ev.clientX, ev.clientY);
+          c.style.visibility = '';
+          const col = el && el.closest('.sort-col');
+          if (col) place(c, col);
+          c.dataset.dragged = '1'; // swallow the click that follows a drag
         }
       };
+      c.addEventListener('pointermove', move); c.addEventListener('pointerup', up); c.addEventListener('pointercancel', up);
+    });
+    c.addEventListener('click', () => {
+      if (c.dataset.dragged) { delete c.dataset.dragged; return; }
+      if (c.classList.contains('done')) return;
+      $$('.sort-card').forEach((x) => x.classList.remove('selected'));
+      selected = selected === c ? null : c;
+      if (selected) { c.classList.add('selected'); sfx.pop(); }
     });
   });
-  document.querySelectorAll('.challenge').forEach((c) => {
-    c.onclick = () => {
-      document.querySelectorAll('.challenge').forEach((x) => x.setAttribute('aria-pressed', x === c ? 'true' : 'false'));
-      sfx.pop();
-      document.getElementById('pick-say').textContent = 'Great choice! You picked “' + c.querySelector('b').textContent + '.” God will help you do it.';
-    };
+  $$('.sort-col').forEach((col) => {
+    const act = () => { if (selected) place(selected, col); };
+    col.addEventListener('click', (e) => { if (!e.target.closest('.sort-card')) act(); });
+    col.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+  });
+  function place(card, col) {
+    card.classList.remove('selected'); selected = null;
+    if (card.dataset.who === col.dataset.who) {
+      card.classList.add('done'); card.disabled = true;
+      col.appendChild(card);
+      sorted++;
+      $('#' + col.dataset.who + '-n').textContent = $$('.sort-card', col).length + ' / 3';
+      sfx.ding();
+      if (sorted === SORT.length) { $('#sort-say').textContent = 'Great sorting! Adam brought death, but Jesus brings grace and life.'; win(80); }
+    } else { shake(card); sfx.boing(); }
+  }
+
+  // ---------- 6 · correct the mistakes ----------
+  const FIX = [
+    ['One trespass brought', 'celebration', 'condemnation', ['condemnation', 'cookies', 'sunshine'], 'for all people.'],
+    ['One righteous act brought justification and', 'punishment', 'life', ['homework', 'life', 'sleep'], 'for all people.'],
+    ['Through one man’s disobedience, many were made', 'righteous', 'sinners', ['kings', 'sinners', 'taller'], '.'],
+    ['Through one man’s obedience, many will be made', 'sinners', 'righteous', ['righteous', 'grumpy', 'famous'], '.'],
+  ];
+  let fixed = 0;
+  FIX.forEach(([pre, wrong, right, opts, post]) => {
+    const line = document.createElement('div');
+    line.className = 'fixline';
+    line.innerHTML = `<p>${pre} <button class="oops" aria-label="Wrong word: ${wrong}. Tap to fix">${wrong}</button>${post.startsWith('.') ? '' : ' '}${post}</p><div class="options" hidden>${opts.map((o) => `<button class="btn small alt">${o}</button>`).join('')}</div>`;
+    const oops = $('.oops', line), optBox = $('.options', line);
+    oops.onclick = () => { if (!oops.classList.contains('fixed')) { optBox.hidden = !optBox.hidden; sfx.pop(); } };
+    $$('.btn', optBox).forEach((b) => b.onclick = () => {
+      if (b.textContent === right) {
+        oops.textContent = right; oops.classList.add('fixed'); oops.setAttribute('aria-label', right);
+        optBox.hidden = true; fixed++; sfx.ding();
+        if (fixed === FIX.length) { $('#fix-say').textContent = 'All fixed! Adam’s one sin brought condemnation. Jesus’s one righteous act brings life.'; win(80); }
+      } else { shake(b); sfx.boing(); }
+    });
+    $('#fixes').appendChild(line);
   });
 
-  // Confetti
-  const cv = document.getElementById('confetti');
-  const ctx = cv.getContext('2d');
+  // ---------- 7 · find the answer ----------
+  const blanks = $$('.blank');
+  let bi = 0;
+  const markActive = () => blanks.forEach((b, k) => b.classList.toggle('active', k === bi));
+  markActive();
+  shuffle(['sin', 'grace', 'death', 'eternal life', 'money', 'toys']).forEach((w) => {
+    const b = document.createElement('button');
+    b.className = 'btn alt'; b.textContent = w;
+    b.onclick = () => {
+      if (bi >= blanks.length) return;
+      const say = $('#fill-say');
+      if (blanks[bi].dataset.a === w) {
+        blanks[bi].textContent = w; blanks[bi].classList.add('filled');
+        b.disabled = true; bi++; markActive(); sfx.ding();
+        say.className = 'say good'; say.textContent = bi < blanks.length ? 'Yes! Next blank…' : 'Grace is bigger than sin! God is gracious.';
+        if (bi === blanks.length) win(80);
+      } else { shake(b); sfx.boing(); say.className = 'say bad'; say.textContent = 'Not that one. Try another word!'; }
+    };
+    $('#bank').appendChild(b);
+  });
+
+  // ---------- 8 · memory verse ----------
+  const VERSE = 'Consequently, just as one trespass resulted in condemnation for all people, so also one righteous act resulted in justification and life for all people.';
+  $('#mv').innerHTML = '“' + VERSE.split(' ').map((w) => `<span class="w">${w}</span>`).join(' ') + '”';
+  const vw = $$('.w', $('#mv'));
+  $('#hide-word').onclick = () => {
+    const left = vw.filter((w) => !w.classList.contains('hid'));
+    if (!left.length) return;
+    left[Math.floor(Math.random() * left.length)].classList.add('hid');
+    sfx.pop();
+    const n = vw.length - left.length + 1;
+    $('#mv-say').textContent = n === vw.length ? 'All hidden! Can you say it from memory?' : n + ' of ' + vw.length + ' words hidden';
+    if (n === vw.length) win(60);
+  };
+  $('#show-all').onclick = () => { vw.forEach((w) => w.classList.remove('hid')); $('#mv-say').textContent = ''; };
+
+  // ---------- 9 · vocabulary + discussion ----------
+  const VOCAB = [
+    ['trespass', 'a sin'],
+    ['judgment', 'punishment for doing wrong'],
+    ['reign', 'to rule with full power and control'],
+    ['provision', 'a supply of the things we need'],
+  ];
+  let selWord = null, matched = 0;
+  shuffle(VOCAB).forEach(([w]) => {
+    const b = document.createElement('button'); b.className = 'mt word'; b.textContent = w; b.dataset.w = w;
+    b.onclick = () => { if (b.classList.contains('ok')) return; $$('.mt.word').forEach((x) => x.classList.remove('sel')); selWord = b; b.classList.add('sel'); sfx.pop(); };
+    $('#words').appendChild(b);
+  });
+  shuffle(VOCAB).forEach(([w, d]) => {
+    const b = document.createElement('button'); b.className = 'mt'; b.textContent = d; b.dataset.w = w;
+    b.onclick = () => {
+      if (!selWord || b.classList.contains('ok')) { if (!selWord) shake($('#words')); return; }
+      if (selWord.dataset.w === b.dataset.w) {
+        b.classList.add('ok'); selWord.classList.remove('sel'); selWord.classList.add('ok'); selWord = null;
+        matched++; sfx.ding(); if (matched === VOCAB.length) win(70);
+      } else { shake(b); sfx.boing(); }
+    };
+    $('#defs').appendChild(b);
+  });
+  $$('.qa').forEach((q) => q.onclick = () => { $('.ans', q).hidden = false; $('.tapme', q).hidden = true; sfx.pop(); });
+
+  // ---------- 10 · closing ----------
+  $('#celebrate').onclick = () => win(160);
+
+  // ---------- confetti ----------
+  const cv = $('#confetti'), ctx = cv.getContext('2d');
   const colors = ['#ff6a5c', '#ffc22e', '#23a865', '#3aa6f0', '#6b46d6'];
   let bits = [], running = false;
   function burst(n) {
@@ -648,7 +866,7 @@ mark { background: var(--sun); color: var(--ink); padding: 0 .2em; border-radius
       x: innerWidth * (0.2 + Math.random() * 0.6), y: innerHeight * 0.45,
       vx: (Math.random() - 0.5) * 12, vy: -6 - Math.random() * 9,
       s: 6 + Math.random() * 7, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4,
-      c: colors[i % colors.length], life: 0
+      c: colors[i % colors.length], life: 0,
     });
     if (!running) { running = true; requestAnimationFrame(tick); }
   }
