@@ -6,6 +6,8 @@ Short, colorful, interactive kids' Bible lessons.
 
 **Main truth:** Jesus's righteousness defeated sin. **God's attribute:** God is gracious.
 
+![Page 1 of the lesson: the title "God's Gift of Righteousness", an opened gift box, and the main truth card](docs/page-1.png)
+
 A 10-page interactive presentation that follows the Lesson 9 lesson guide:
 
 | Page | Lesson part | Kids do |
